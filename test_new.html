@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnPolish - AntiMethod English</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h2 {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff3366;
+        }
+        
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: #ff6600;
+        }
+        
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        ul li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: "•";
+            color: #ff3366;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+        }
+        
+        .btn-white {
+            background: white;
+            color: #0a0a0a;
+            font-weight: 700;
+        }
+        
+        .btn-white:hover {
+            background: #f0f0f0;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ff6600;
+            color: #ff6600;
+        }
+        
+        .btn-secondary:hover {
+            background: #ff6600;
+            color: white;
+        }
+        
+        .warning {
+            background: rgba(255, 51, 102, 0.1);
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .question {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .options {
+            margin-top: 15px;
+        }
+        
+        .option {
+            display: block;
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 51, 102, 0.5);
+        }
+        
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        .option.selected {
+            background: rgba(255, 51, 102, 0.2);
+            border-color: #ff3366;
+        }
+        
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            position: relative;
+            background: conic-gradient(#ff3366 0deg, #ff3366 var(--score), rgba(255, 255, 255, 0.1) var(--score));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            background: #0a0a0a;
+            border-radius: 50%;
+        }
+        
+        .score-number {
+            position: relative;
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .area-scores {
+            margin: 40px 0;
+            text-align: left;
+        }
+        
+        .area-score {
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .area-score-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .area-score-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ff3366, #ff6633);
+            transition: width 1s ease;
+        }
+        
+        .attention {
+            background: rgba(255, 102, 0, 0.2);
+            border: 1px solid #ff6600;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+        
+        .path-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .path-box:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 51, 102, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .path-content p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .path-content p:first-child {
+            font-weight: 600;
+        }
+        
+        .path-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .intro-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            margin: 40px 0;
+        }
+        
+        .glass-ceiling-container {
+            position: relative;
+            width: 45%;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .spinning-wheels-container {
+            position: relative;
+            width: 45%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .glass-ceiling {
+            position: absolute;
+            top: 40%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+        
+        .person-below {
+            position: absolute;
+            bottom: 20%;
+            width: 60px;
+            height: 80px;
+            background: #ff3366;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            animation: hitCeiling 2s ease-in-out infinite;
+        }
+        
+        .natives-above {
+            position: absolute;
+            top: 20%;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .native {
+            width: 50px;
+            height: 60px;
+            background: #4CAF50;
+            border-radius: 25px 25px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .native:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .native:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        .person-spinning {
+            position: relative;
+            width: 80px;
+            height: 100px;
+            background: #ff6600;
+            border-radius: 40px 40px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+        
+        .wheels {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .wheel {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            position: relative;
+            animation: spin 1s linear infinite;
+        }
+        
+        .wheel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 2px;
+            background: #fff;
+        }
+        
+        .dust-cloud {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.2), transparent);
+            animation: dustPuff 1s ease-out infinite;
+        }
+        
+        @keyframes hitCeiling {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes dustPuff {
+            0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+            50% { opacity: 0.5; }
+            100% { opacity: 0; transform: translateX(-50%) scale(1.5); }
+        }
+        
+        .divider-line {
+            width: 2px;
+            height: 300px;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent);
+            margin: 0 20px;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .intro-text h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .intro-text p {
+            font-size: 1.4em;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .intro-visual {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .glass-ceiling-container,
+            .spinning-wheels-container {
+                width: 100%;
+            }
+            
+            .divider-line {
+                display: none;
+            }
+        }
+        
+        .detailed-results {
+            margin-top: 40px;
+            text-align: left;
+        }
+        
+        .myth-item {
+            background: rgba(255, 51, 102, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #ff3366;
+        }
+        
+        .offer-box {
+            background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(255,102,0,0.1));
+            border: 1px solid rgba(255,51,102,0.3);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .swipe-container {
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .swipe-screen {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .swipe-screen.active {
+            display: block;
+        }
+        
+        .swipe-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator-dot.active {
+            background: #ff3366;
+            transform: scale(1.2);
+        }
+        
+        .perspective-screen h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        
+        .perspective-screen p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .perspective-screen em {
+            color: #ff6600;
+            font-style: italic;
+        }
+        
+        .test-time {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Screen 0A: English Introduction -->
+        <div class="screen active" id="screen0a">
+            <div class="intro-text">
+                <h1 style="font-size: 4em; margin-bottom: 60px;">UnPolish</h1>
+                <p style="font-size: 2em; margin-bottom: 30px; font-weight: 600;">You've learned English.</p>
+                <p style="font-size: 2em; margin-bottom: 30px; opacity: 0.9;">You use it.</p>
+                <p style="font-size: 2em; margin-bottom: 50px; opacity: 0.8;">But it's never quite right.</p>
+            </div>
+            <button class="btn" onclick="showPolishIntro()">→</button>
+        </div>
+        
+        <!-- Screen 0B: Polish Introduction -->
+        <div class="screen" id="screen0b">
+            <div class="intro-text">
+                <h1 style="font-size: 4em; margin-bottom: 60px;">UnPolish</h1>
+                <p style="font-size: 2em; margin-bottom: 30px; font-weight: 600;">Próbowałeś wiele razy.</p>
+                <p style="font-size: 2em; margin-bottom: 50px; opacity: 0.9;">I nadal nie działa.</p>
+            </div>
+            <button class="btn" onclick="showGlassCeiling()">→</button>
+        </div>
+        
+        <!-- Screen 0C: Glass Ceiling Visual -->
+        <div class="screen" id="screen0c">
+            <div class="intro-text">
+                <h2 style="font-size: 2em; margin-bottom: 40px;">Some hit a ceiling...</h2>
+            </div>
+            <div class="intro-visual" style="justify-content: center;">
+                <div class="glass-ceiling-container" style="width: 70%;">
+                    <div class="natives-above">
+                        <div class="native">😊</div>
+                        <div class="native">😎</div>
+                        <div class="native">🙂</div>
+                    </div>
+                    <div class="glass-ceiling"></div>
+                    <div class="person-below">😤</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.4em; opacity: 0.8;">You speak well, but can't reach native level</p>
+                <button class="btn" onclick="showSpinningWheels()" style="margin-top: 30px;">→</button>
+            </div>
+        </div>
+        
+        <!-- Screen 0D: Spinning Wheels Visual -->
+        <div class="screen" id="screen0d">
+            <div class="intro-text">
+                <h2 style="font-size: 2em; margin-bottom: 40px;">Others can't get started...</h2>
+            </div>
+            <div class="intro-visual" style="justify-content: center;">
+                <div class="spinning-wheels-container" style="width: 70%;">
+                    <div class="person-spinning">
+                        😰
+                        <div class="wheels">
+                            <div class="wheel"></div>
+                            <div class="wheel"></div>
+                        </div>
+                        <div class="dust-cloud"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.4em; opacity: 0.8;">Working hard but going nowhere</p>
+                <button class="btn" onclick="showComparison()" style="margin-top: 30px;">→</button>
+            </div>
+        </div>
+        
+        <!-- Screen 0E: Side by Side Comparison -->
+        <div class="screen" id="screen0e">
+            <div class="intro-text">
+                <h2 style="font-size: 2.5em; margin-bottom: 40px;">Two Types of Stuck</h2>
+            </div>
+            <div class="intro-visual">
+                <div class="glass-ceiling-container">
+                    <div class="natives-above">
+                        <div class="native">😊</div>
+                        <div class="native">😎</div>
+                        <div class="native">🙂</div>
+                    </div>
+                    <div class="glass-ceiling"></div>
+                    <div class="person-below">😤</div>
+                    <p style="position: absolute; bottom: 10px; font-size: 1.2em; opacity: 0.8;">Can't break through</p>
+                </div>
+                
+                <div class="divider-line"></div>
+                
+                <div class="spinning-wheels-container">
+                    <div class="person-spinning">
+                        😰
+                        <div class="wheels">
+                            <div class="wheel"></div>
+                            <div class="wheel"></div>
+                        </div>
+                        <div class="dust-cloud"></div>
+                    </div>
+                    <p style="position: absolute; bottom: 10px; font-size: 1.2em; opacity: 0.8;">Going nowhere fast</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.6em; opacity: 0.9; margin-bottom: 30px; font-weight: 600;">Which one is you?</p>
+                <button class="btn" onclick="showPathSelection()">Choose Your Path →</button>
+            </div>
+        </div>
+        
+        <!-- Screen 1: Path Selection -->
+        <div class="screen" id="screen1">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h1 style="font-size: 4em; margin-bottom: 15px;">UnPolish</h1>
+                <p style="font-size: 1.5em; opacity: 0.8; font-weight: 600;">AntiMethod English</p>
+            </div>
+            
+            <div class="path-container">
+                <div class="path-box" onclick="selectPath('advanced')">
+                    <div class="path-content">
+                        <p>You speak English.</p>
+                        <p style="opacity: 0.9;">But something's missing.</p>
+                        <p style="opacity: 0.9;">You know it.</p>
+                    </div>
+                    <button class="btn" style="width: 100%;">→</button>
+                </div>
+                
+                <div class="path-box" onclick="selectPath('beginner')">
+                    <div class="path-content">
+                        <p>English nie działa.</p>
+                        <p style="opacity: 0.9;">Za dużo czasów.</p>
+                        <p style="opacity: 0.9;">Za dużo regułek.</p>
+                    </div>
+                    <button class="btn" style="width: 100%;">→</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pre-Test Warning Screen -->
+        <div class="screen" id="preTestWarning">
+            <div style="text-align: center;">
+                <h2 style="font-size: 2.5em; margin-bottom: 40px;">This Test Is Different</h2>
+                
+                <p style="font-size: 1.3em; margin-bottom: 15px;"><strong>We won't ask you to conjugate verbs.</strong></p>
+                <p style="font-size: 1.3em; margin-bottom: 15px;"><strong>We won't quiz you on irregular past participles.</strong></p>
+                <p style="font-size: 1.3em; margin-bottom: 30px;"><strong>We won't make you fill in blanks.</strong></p>
+                
+                <p style="font-size: 1.4em; margin-bottom: 30px; color: #ff6600;"><strong>Instead, we'll uncover why you still don't think in English.</strong></p>
+                
+                <p style="font-size: 1.2em; margin-bottom: 20px;">Some questions will feel strange. Perfect.</p>
+                <p style="font-size: 1.2em; margin-bottom: 30px;">They're designed to uncover what traditional teaching did to your brain.</p>
+                
+                <p class="test-time"><strong>5 minutes. 15 questions. 17 years of teaching experience behind each one.</strong></p>
+                
+                <p style="font-size: 1.3em; margin-bottom: 30px;">Ready to see what's really blocking you?</p>
+                
+                <button class="btn" onclick="startTest()">Start Test →</button>
+            </div>
+        </div>
+        
+        <!-- Screen 2: Hook -->
+        <div class="screen" id="screen2">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h1 style="font-size: 4em; margin-bottom: 15px;">UnPolish</h1>
+                <p style="font-size: 1.5em; opacity: 0.8; font-weight: 600;">Natify your English</p>
+            </div>
+            <h1>You speak English.</h1>
+            <p><strong>Native speakers understand you.</strong></p>
+            <p><strong>But there's still that gap.</strong></p>
+            <br>
+            <p>You don't sound like them. You don't think like them.</p>
+            <p>You know it. They know it.</p>
+            <button class="btn" onclick="showPreTestWarning()">Diagnose and Close The Gap</button>
+        </div>
+        
+        <!-- Screen 3: Promise -->
+        <div class="screen" id="screen3">
+            <h1>It's not vocabulary.</h1>
+            <p><strong>It's not more practice.</strong></p>
+            <p><strong>It's the invisible wall between textbook English and native thinking.</strong></p>
+            <br>
+            <p>You learned rules. They understand meaning.</p>
+            <p>That's why you still:</p>
+            <ul>
+                <li>Second-guess yourself</li>
+                <li>Sound formal when they're casual</li>
+                <li>Miss the natural flow</li>
+                <li>Feel like an outsider</li>
+            </ul>
+            <button class="btn" onclick="showPreTestWarning()">Test my English</button>
+        </div>
+        
+        <!-- Screen 4: Introduction -->
+        <div class="screen" id="screen4">
+            <h1>This test is different.</h1>
+            <p>We're not testing your English. We're testing what you believe about English and how your brain processes it.</p>
+            <br>
+            <p><strong>This diagnostic will reveal:</strong></p>
+            <ul>
+                <li>Which textbook myths are blocking you</li>
+                <li>Where Polish is interfering with your English</li>
+                <li>Whether you see meaning or just follow rules</li>
+                <li>If you have the foundations to naturally process English</li>
+            </ul>
+            <p>Some questions might seem strange. That's intentional. We're testing your mental model, not your memorization.</p>
+            <div class="warning">
+                <p><strong>Warning: This might hurt your grammar ego.</strong></p>
+            </div>
+            <p>Ready to see how your brain really processes English?</p>
+            <button class="btn" onclick="showPreTestWarning()">Begin Test</button>
+        </div>
+        
+        <!-- Test Screen -->
+        <div class="screen" id="testScreen">
+            <div class="attention" id="attentionNotice" style="display: none;">
+                <p>ATTENTION: In multiple choice questions mark EVERY answer you think is true - most questions have more than one correct answer!</p>
+            </div>
+            
+            <div id="testContent">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+            
+            <button class="btn" onclick="nextQuestion()">Next</button>
+        </div>
+        
+        <!-- Results Screen -->
+        <div class="screen" id="resultsScreen">
+            <div class="results">
+                <h1>Your Results</h1>
+                <div class="score-circle" style="--score: 0deg">
+                    <div class="score-number" id="finalScore">0%</div>
+                </div>
+                <h2 id="scoreMessage">Calculating...</h2>
+                
+                <div class="area-scores">
+                    <h3>Your Area Scores:</h3>
+                    <div class="area-score">
+                        <span>General Understanding</span>
+                        <div class="area-score-bar">
+                            <div class="area-score-fill" id="area1Score" style="width: 0%"></div>
+                        </div>
+                        <span id="area1Percent">0%</span>
+                    </div>
+                    <div class="area-score">
+                        <span>Simple vs Continuous</span>
+                        <div class="area-score-bar">
+                            <div class="area-score-fill" id="area2Score" style="width: 0%"></div>
+                        </div>
+                        <span id="area2Percent">0%</span>
+                    </div>
+                    <div class="area-score">
+                        <span>Perfect Tenses</span>
+                        <div class="area-score-bar">
+                            <div class="area-score-fill" id="area3Score" style="width: 0%"></div>
+                        </div>
+                        <span id="area3Percent">0%</span>
+                    </div>
+                    <div class="area-score">
+                        <span>Articles</span>
+                        <div class="area-score-bar">
+                            <div class="area-score-fill" id="area4Score" style="width: 0%"></div>
+                        </div>
+                        <span id="area4Percent">0%</span>
+                    </div>
+                    <div class="area-score">
+                        <span>Verbs & Phrasals</span>
+                        <div class="area-score-bar">
+                            <div class="area-score-fill" id="area5Score" style="width: 0%"></div>
+                        </div>
+                        <span id="area5Percent">0%</span>
+                    </div>
+                </div>
+                
+                <div id="customMessage" style="margin: 30px 0;"></div>
+                
+                <button class="btn" onclick="showPerspectiveShift()">Continue →</button>
+            </div>
+        </div>
+        
+        <!-- Perspective Shift Screens -->
+        <div class="screen" id="perspectiveShift">
+            <div class="swipe-container">
+                <!-- Screen 1 -->
+                <div class="swipe-screen active perspective-screen" id="perspective1">
+                    <h3>What Was That Test All About?</h3>
+                    
+                    <p>Traditional teaching gave you the gift that keeps on giving:<br>
+                    <em>Confusion wrapped in rules, topped with exceptions.</em></p>
+                    
+                    <p>They convinced you English grammar is some secret code only Cambridge professors understand—so they can teach it to you forever.</p>
+                    
+                    <p style="font-size: 1.5em; color: #ff6600; margin-top: 30px;"><strong>But what if...</strong></p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot active" onclick="goToSlide(1)"></span>
+                        <span class="indicator-dot" onclick="goToSlide(2)"></span>
+                        <span class="indicator-dot" onclick="goToSlide(3)"></span>
+                    </div>
+                </div>
+                
+                <!-- Screen 2 -->
+                <div class="swipe-screen perspective-screen" id="perspective2">
+                    <h3>English isn't rules. It's meaning.</h3>
+                    
+                    <p>Every word, structure, or expression SHOWS something. Can you see it?</p>
+                    
+                    <p style="font-size: 1.3em; margin: 30px 0;">
+                        Natives feel this. You? You're still consulting your mental rulebook like it's IKEA instructions.
+                    </p>
+                    
+                    <p>But what if we could teach you to understand what they know naturally...</p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToSlide(1)"></span>
+                        <span class="indicator-dot active" onclick="goToSlide(2)"></span>
+                        <span class="indicator-dot" onclick="goToSlide(3)"></span>
+                    </div>
+                </div>
+                
+                <!-- Screen 3 -->
+                <div class="swipe-screen perspective-screen" id="perspective3">
+                    <p style="font-size: 1.3em; margin-bottom: 30px;">In the next few lessons, we won't teach you WHEN to use things.</p>
+                    
+                    <p style="font-size: 1.5em; color: #ff6600; margin: 30px 0;">
+                        <strong>We'll show you WHAT they actually do, mean, and show.</strong>
+                    </p>
+                    
+                    <p style="margin: 40px 0;">⚠️ Warning: Side effects include sudden clarity and uncontrollable "Aha!" moments.</p>
+                    
+                    <h3 style="margin-top: 50px;">Ready to Fix What Traditional Teaching Broke?</h3>
+                    
+                    <p style="font-size: 1.2em; margin: 20px 0;">
+                        <strong>No tricks. No hacks. No dancing cartoon owl.</strong>
+                    </p>
+                    
+                    <p style="font-size: 1.2em; margin-bottom: 40px;">
+                        <strong>Just real meaning, logic and how English really works.</strong>
+                    </p>
+                    
+                    <button class="btn" onclick="showDashboard()">Show Me How →</button>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToSlide(1)"></span>
+                        <span class="indicator-dot" onclick="goToSlide(2)"></span>
+                        <span class="indicator-dot active" onclick="goToSlide(3)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard (placeholder) -->
+        <div class="screen" id="dashboard">
+            <h1>Welcome to Your Learning Dashboard</h1>
+            <p>Choose a module to begin:</p>
+            <div style="margin-top: 40px;">
+                <button class="btn" onclick="startArticlesModule()">Articles Module (Free)</button>
+                <button class="btn btn-secondary" style="margin-left: 20px;">Simple vs Continuous (Locked)</button>
+            </div>
+        </div>
+        
+        <!-- Articles Module -->
+        <div class="screen" id="articlesModule">
+            <div class="swipe-container">
+                <!-- Lesson 1: Why English Forces You to Choose -->
+                <div class="swipe-screen active perspective-screen" id="articles1-1">
+                    <h3>Why English Forces You to Choose</h3>
+                    
+                    <p style="font-size: 1.2em; margin: 20px 0;"><strong>In Polish:</strong><br>
+                    "Dajcie długopis"<br>
+                    "Który?" (Which one?)</p>
+                    
+                    <p style="font-size: 1.3em; color: #ff6600; margin: 30px 0;">
+                        <strong>In English, this conversation NEVER happens.</strong>
+                    </p>
+                    
+                    <p>Why? Because English forces you to answer "which one?" BEFORE anyone can ask:</p>
+                    <ul style="list-style: none; margin: 20px 0;">
+                        <li style="margin: 10px 0;">• "Give me <strong>A</strong> pen" (any one)</li>
+                        <li style="margin: 10px 0;">• "Give me <strong>THE</strong> pen" (you know which)</li>
+                    </ul>
+                    
+                    <p style="font-size: 1.2em; margin-top: 30px;">
+                        <strong>English eliminates questions by answering them upfront.</strong><br>
+                        <strong>That's the pragmatic genius of articles.</strong>
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: Three Articles, Not Two -->
+                <div class="swipe-screen perspective-screen" id="articles1-2">
+                    <h3>Three Articles, Not Two</h3>
+                    
+                    <p style="font-size: 1.2em;">Everyone knows A and THE.<br>
+                    <strong>But there are THREE articles:</strong></p>
+                    
+                    <ol style="font-size: 1.3em; margin: 30px 0; list-style-position: inside;">
+                        <li>A/AN</li>
+                        <li>THE</li>
+                        <li style="color: #ff6600;"><strong>ZERO</strong> (no article)</li>
+                    </ol>
+                    
+                    <p style="font-size: 1.2em; margin: 30px 0;">
+                        <strong>This isn't random. It's a pragmatic system.</strong>
+                    </p>
+                    
+                    <p>Polish allows "Dajcie długopis" - then deals with confusion later.</p>
+                    
+                    <p style="font-size: 1.2em; color: #ff6600; margin-top: 20px;">
+                        English says: "No confusion allowed. Clarify immediately."
+                    </p>
+                    
+                    <p style="font-size: 1.1em; margin-top: 30px;">
+                        <strong>Every noun must announce its type. No ambiguity permitted.</strong>
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: The Real Problem -->
+                <div class="swipe-screen perspective-screen" id="articles1-3">
+                    <h3>The Real Problem Articles Solve</h3>
+                    
+                    <p style="font-size: 1.2em; margin-bottom: 20px; text-align: center;">
+                        <strong>Some nouns trigger "Which one?" • Some never do</strong>
+                    </p>
+                    
+                    <!-- Visual diagram -->
+                    <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0;">
+                        <!-- Which-one nouns -->
+                        <div style="background: rgba(255,102,0,0.1); padding: 30px; border-radius: 15px; border: 2px solid #ff6600; flex: 1; max-width: 300px;">
+                            <h4 style="text-align: center; color: #ff6600; margin-bottom: 20px;">"WHICH-ONE" NOUNS</h4>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0;">
+                                <span style="font-size: 2em;">⭐</span>
+                                <span style="font-size: 2em;">⭐</span>
+                                <span style="font-size: 2em;">⭐</span>
+                                <span style="font-size: 2em;">⭐</span>
+                                <span style="font-size: 2em;">⭐</span>
+                                <span style="font-size: 2em;">⭐</span>
+                            </div>
+                            <p style="text-align: center; margin: 10px 0;">pen, doctor, car</p>
+                            <ul style="font-size: 0.9em; margin-top: 15px;">
+                                <li>Many exist</li>
+                                <li>Can be confused</li>
+                                <li>Need A or THE</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- One-of-a-kind nouns -->
+                        <div style="background: rgba(255,51,102,0.1); padding: 30px; border-radius: 15px; border: 2px solid #ff3366; flex: 1; max-width: 300px;">
+                            <h4 style="text-align: center; color: #ff3366; margin-bottom: 20px;">"ONE-OF-A-KIND"</h4>
+                            <div style="display: flex; justify-content: center; margin: 20px 0;">
+                                <span style="font-size: 4em;">🌟</span>
+                            </div>
+                            <p style="text-align: center; margin: 10px 0;">air, love, physics</p>
+                            <ul style="font-size: 0.9em; margin-top: 15px;">
+                                <li>General concepts</li>
+                                <li>No confusion</li>
+                                <li>Need ZERO article</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 30px; text-align: center;">
+                        <strong>Polish:</strong> Context decides later • <strong>English:</strong> Articles decide upfront
+                    </p>
+                    
+                    <p style="font-size: 0.9em; opacity: 0.8; margin-top: 20px; text-align: center;">
+                        (Schools call these "countable/uncountable" - missing the real point!)
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: The Three-Way System -->
+                <div class="swipe-screen perspective-screen" id="articles1-4">
+                    <h3>The Three-Way System</h3>
+                    
+                    <div style="background: rgba(255,102,0,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>For "WHICH-ONE" nouns:</strong></p>
+                        <p>• <strong>A/AN</strong> = any one (doesn't matter which)</p>
+                        <p>• <strong>THE</strong> = the one you know I mean</p>
+                    </div>
+                    
+                    <div style="background: rgba(255,51,102,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>For "ONE-OF-A-KIND" nouns:</strong></p>
+                        <p>• <strong>ZERO</strong> = no article (no "which one?" possible)</p>
+                    </div>
+                    
+                    <p style="margin-top: 30px;"><strong>Examples:</strong></p>
+                    <ul style="list-style: none;">
+                        <li>• "I need <strong>A</strong> pen" = any pen will do</li>
+                        <li>• "I need <strong>THE</strong> pen" = that specific pen we both know about</li>
+                        <li>• "I need air" = just air (nobody asks "which air?")</li>
+                    </ul>
+                    
+                    <p style="font-size: 1.2em; color: #ff6600; margin-top: 30px;">
+                        <strong>A and THE are partners</strong> - both exist only for "which-one" nouns.
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: THE for Categories -->
+                <div class="swipe-screen perspective-screen" id="articles1-5">
+                    <h3>The ONE Expansion: THE for Categories</h3>
+                    
+                    <p style="font-size: 1.2em;">ONE special use of THE: generalizing "which-one" nouns.</p>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px; margin: 30px 0;">
+                        <p style="font-size: 1.3em; text-align: center; margin-bottom: 20px;">
+                            <strong>"I hate going to THE doctor"</strong>
+                        </p>
+                        
+                        <p>We can't say "a doctor" (sounds like you'd like other doctors).</p>
+                        <p>We can't say "doctor" (it's a which-one noun).</p>
+                        
+                        <p style="margin-top: 20px;">So THE generalizes the entire category. Not pointing to one doctor, but ALL doctors as a concept.</p>
+                    </div>
+                    
+                    <p style="font-size: 1.1em; color: #ff6600;">
+                        This isn't an exception - it's THE organizing which-one nouns, just at category level.
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: The Aha Moment -->
+                <div class="swipe-screen perspective-screen" id="articles1-6">
+                    <h3>The Aha Moment</h3>
+                    
+                    <p style="font-size: 1.3em; margin-bottom: 30px;">
+                        <strong>What happens in native speakers' brains:</strong>
+                    </p>
+                    
+                    <div style="background: rgba(255,51,102,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em; margin-bottom: 15px;">
+                            <strong>When you say "Give me pen" 🙉</strong>
+                        </p>
+                        <p>Native brain: <em>"Which pen? There are millions of pens! ERROR! ERROR!"</em></p>
+                        <p style="margin-top: 15px; color: #ff3366;">
+                            You sound like Tarzan. Their brain scrambles for context.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(76,175,80,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em; margin-bottom: 15px;">
+                            <strong>When you say "Give me A pen" ✓</strong>
+                        </p>
+                        <p>Native brain: <em>"Any pen will do. I'll grab one."</em></p>
+                        <p style="margin-top: 15px; color: #4CAF50;">
+                            Clear instruction. No confusion.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(76,175,80,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em; margin-bottom: 15px;">
+                            <strong>When you say "Give me THE pen" ✓</strong>
+                        </p>
+                        <p>Native brain: <em>"Ah, the pen we both know about. Got it."</em></p>
+                        <p style="margin-top: 15px; color: #4CAF50;">
+                            Instant understanding. No mental scrambling.
+                        </p>
+                    </div>
+                    
+                    <p style="font-size: 1.2em; margin: 30px 0; text-align: center;">
+                        <strong>Articles aren't decoration.<br>
+                        They're NAVIGATION for the listener's brain.</strong>
+                    </p>
+                    
+                    <p style="font-size: 1.1em;">
+                        <strong>Skip articles on "which-one" nouns = Force confusion</strong><br>
+                        <strong>Use them correctly = Guide understanding</strong>
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                    </div>
+                </div>
+                
+                <!-- Lesson 1: Preview -->
+                <div class="swipe-screen perspective-screen" id="articles1-7">
+                    <h3>Let's Bust Some Myths</h3>
+                    
+                    <p style="font-size: 1.3em; margin: 30px 0;">
+                        Now that you understand the logic,<br>
+                        let's destroy some common myths.
+                    </p>
+                    
+                    <p style="font-size: 1.2em; color: #ff6600; margin: 40px 0;">
+                        Ready to see how textbooks lie?
+                    </p>
+                    
+                    <button class="btn" onclick="goToArticleSlide(1, 8)">Show Me the Lies →</button>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 7)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 8)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 9)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 10)"></span>
+                    </div>
+                </div>
+                
+                <!-- Myth 1: THE sun/moon -->
+                <div class="swipe-screen perspective-screen" id="articles1-8">
+                    <h3>Myth #1: "Use THE with unique things"</h3>
+                    
+                    <div style="background: rgba(255,51,102,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>Textbook lie:</strong></p>
+                        <p>"Use THE with the sun because Earth has only one sun"</p>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.1em; margin-bottom: 15px;"><strong>Reality check:</strong></p>
+                        <p>• The universe has BILLIONS of suns (they're called stars!)</p>
+                        <p>• The universe has BILLIONS of moons</p>
+                        <p>• Even our solar system has 200+ moons</p>
+                    </div>
+                    
+                    <div style="background: rgba(76,175,80,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>The truth:</strong></p>
+                        <p>We say "THE sun" because listener knows we mean Earth's sun</p>
+                        <p style="margin-top: 15px;"><strong>Proof:</strong> On Mars with 2 moons, you'd say<br>
+                        "Look at THE big moon" (not because it's unique!)</p>
+                    </div>
+                    
+                    <p style="font-size: 1.1em; margin-top: 30px; text-align: center; color: #ff6600;">
+                        THE = "you know which one" (NOT "the only one")
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 8)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 9)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 10)"></span>
+                    </div>
+                </div>
+                
+                <!-- Myth 2: Country names -->
+                <div class="swipe-screen perspective-screen" id="articles1-9">
+                    <h3>Myth #2: "Country name exceptions"</h3>
+                    
+                    <div style="background: rgba(255,51,102,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>Textbook lie:</strong></p>
+                        <p>"THE United States and THE Netherlands are exceptions to the no-article-before-countries rule"</p>
+                    </div>
+                    
+                    <div style="background: rgba(76,175,80,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>The truth:</strong></p>
+                        <p>These aren't names - they're DESCRIPTIONS!</p>
+                        
+                        <div style="margin-top: 20px;">
+                            <p>• THE United States = THE states that are united</p>
+                            <p>• THE Netherlands = THE low lands</p>
+                            <p>• THE United Kingdom = THE kingdom that is united</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p><strong>Compare:</strong></p>
+                        <p>• Poland, France, Germany = Proper names (no article)</p>
+                        <p>• THE Czech Republic = Description (needs article)</p>
+                    </div>
+                    
+                    <p style="font-size: 1.1em; margin-top: 30px; text-align: center; color: #ff6600;">
+                        No exceptions - just descriptions vs. names!
+                    </p>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 8)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 9)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 10)"></span>
+                    </div>
+                </div>
+                
+                <!-- Myth 3: Second mention -->
+                <div class="swipe-screen perspective-screen" id="articles1-10">
+                    <h3>Myth #3: "Second mention = THE"</h3>
+                    
+                    <div style="background: rgba(255,51,102,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>Textbook lie:</strong></p>
+                        <p>"Always use THE when mentioning something for the second time"</p>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.1em;"><strong>Test example that proves it's wrong:</strong></p>
+                        <p style="margin-top: 15px;">
+                            "I would like to have <strong>A</strong> car.<br>
+                            <strong>A</strong> car that would be fast.<br>
+                            <strong>A</strong> car that would be expensive."
+                        </p>
+                        <p style="margin-top: 15px; font-style: italic;">
+                            Three mentions, still using A!
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(76,175,80,0.1); padding: 25px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 1.2em;"><strong>The truth:</strong></p>
+                        <p>Still A because you're describing ANY car from the millions that exist</p>
+                        <p style="margin-top: 15px;">You're not pointing to a specific car - you're dreaming about features of any hypothetical car</p>
+                    </div>
+                    
+                    <p style="font-size: 1.1em; margin-top: 30px; text-align: center; color: #ff6600;">
+                        THE = listener knows which one<br>
+                        (NOT about counting mentions!)
+                    </p>
+                    
+                    <button class="btn" onclick="startArticlesLesson2()" style="margin-top: 30px;">Continue to Lesson 2 →</button>
+                    
+                    <div class="swipe-indicators">
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 1)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 2)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 3)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 4)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 5)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 6)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 7)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 8)"></span>
+                        <span class="indicator-dot" onclick="goToArticleSlide(1, 9)"></span>
+                        <span class="indicator-dot active" onclick="goToArticleSlide(1, 10)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentScreen = '0a';
+        let currentQuestion = 0;
+        let answers = {};
+        let finalResults = {};
+        let selectedPath = null;
+        let currentPerspectiveSlide = 1;
+        
+        function showPolishIntro() {
+            document.getElementById('screen0a').classList.remove('active');
+            document.getElementById('screen0b').classList.add('active');
+        }
+        
+        function showGlassCeiling() {
+            document.getElementById('screen0b').classList.remove('active');
+            document.getElementById('screen0c').classList.add('active');
+        }
+        
+        function showSpinningWheels() {
+            document.getElementById('screen0c').classList.remove('active');
+            document.getElementById('screen0d').classList.add('active');
+        }
+        
+        function showComparison() {
+            document.getElementById('screen0d').classList.remove('active');
+            document.getElementById('screen0e').classList.add('active');
+        }
+        
+        function showPathSelection() {
+            document.getElementById('screen0e').classList.remove('active');
+            document.getElementById('screen1').classList.add('active');
+        }
+        
+        function selectPath(path) {
+            selectedPath = path;
+            currentScreen = path === 'advanced' ? 2 : 3;
+            document.getElementById('screen1').classList.remove('active');
+            document.getElementById(`screen${currentScreen}`).classList.add('active');
+        }
+        
+        function showPreTestWarning() {
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('preTestWarning').classList.add('active');
+        }
+        
+        function nextScreen() {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen++;
+            document.getElementById(`screen${currentScreen}`).classList.add('active');
+        }
+        
+        function startTest() {
+            document.getElementById('preTestWarning').classList.remove('active');
+            document.getElementById('testScreen').classList.add('active');
+            document.getElementById('attentionNotice').style.display = 'block';
+            showQuestion();
+            updateProgress();
+        }
+        
+        function showPerspectiveShift() {
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('perspectiveShift').classList.add('active');
+            currentPerspectiveSlide = 1;
+            updatePerspectiveSlides();
+        }
+        
+        function goToSlide(slideNum) {
+            currentPerspectiveSlide = slideNum;
+            updatePerspectiveSlides();
+        }
+        
+        function updatePerspectiveSlides() {
+            for (let i = 1; i <= 3; i++) {
+                const slide = document.getElementById(`perspective${i}`);
+                const dot = document.querySelectorAll('.indicator-dot')[i-1];
+                
+                if (i === currentPerspectiveSlide) {
+                    slide.classList.add('active');
+                    dot.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                    dot.classList.remove('active');
+                }
+            }
+        }
+        
+        function showDashboard() {
+            document.getElementById('perspectiveShift').classList.remove('active');
+            document.getElementById('dashboard').classList.add('active');
+        }
+        
+        function startArticlesModule() {
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('articlesModule').classList.add('active');
+            currentArticleSlide = {lesson: 1, slide: 1};
+            updateArticleSlides();
+        }
+        
+        function goToArticleSlide(lesson, slide) {
+            currentArticleSlide = {lesson: lesson, slide: slide};
+            updateArticleSlides();
+        }
+        
+        function updateArticleSlides() {
+            // Update slides for lesson 1
+            for (let i = 1; i <= 10; i++) {
+                const slide = document.getElementById(`articles1-${i}`);
+                if (slide) {
+                    if (currentArticleSlide.lesson === 1 && currentArticleSlide.slide === i) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                }
+            }
+            
+            // Update dots
+            const dots = document.querySelectorAll('#articlesModule .indicator-dot');
+            dots.forEach((dot, index) => {
+                if (index === currentArticleSlide.slide - 1) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function startArticlesLesson2() {
+            alert('Lesson 2 coming soon! This would continue with A vs THE explanations.');
+        }
+        
+        // Add swipe functionality for articles module
+        let currentArticleSlide = {lesson: 1, slide: 1};
+        const articlesContainer = document.querySelector('#articlesModule .swipe-container');
+        
+        if (articlesContainer) {
+            articlesContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            articlesContainer.addEventListener('touchend', (e) => {
+                if (!touchStartX) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentArticleSlide.slide < 10) {
+                        goToArticleSlide(currentArticleSlide.lesson, currentArticleSlide.slide + 1);
+                    } else if (diff < 0 && currentArticleSlide.slide > 1) {
+                        goToArticleSlide(currentArticleSlide.lesson, currentArticleSlide.slide - 1);
+                    }
+                }
+                
+                touchStartX = null;
+            });
+        }
+        
+        // Add swipe functionality for mobile
+        let touchStartX = null;
+        const perspectiveContainer = document.querySelector('.swipe-container');
+        
+        if (perspectiveContainer) {
+            perspectiveContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            perspectiveContainer.addEventListener('touchend', (e) => {
+                if (!touchStartX) return;
+                
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0 && currentPerspectiveSlide < 3) {
+                        goToSlide(currentPerspectiveSlide + 1);
+                    } else if (diff < 0 && currentPerspectiveSlide > 1) {
+                        goToSlide(currentPerspectiveSlide - 1);
+                    }
+                }
+                
+                touchStartX = null;
+            });
+        }
+        
+        const questions = [
+            // AREA 1: General
+            {
+                area: 1,
+                id: 'q1',
+                type: 'radio',
+                question: 'Does the word ANY sometimes mean "Jakiś" and sometimes "Żaden" or does it have just one meaning?',
+                options: ['Two meanings', 'One meaning'],
+                weight: 35
+            },
+            {
+                area: 1,
+                id: 'q1a',
+                type: 'checkbox',
+                question: 'What is correct?',
+                options: [
+                    'Do you have something for me?',
+                    'Do you have nothing for me?',
+                    'Do you have anything for me?',
+                    'Don\'t you have nothing for me?'
+                ],
+                weight: 35
+            },
+            {
+                area: 1,
+                id: 'q2',
+                type: 'radio',
+                question: 'When you hear "Explain me" do you hear "wytłumacz mi"?',
+                options: ['YES', 'NO'],
+                weight: 30
+            },
+            // AREA 2: Simple vs Continuous
+            {
+                area: 2,
+                id: 'q4',
+                type: 'radio',
+                question: 'When you see the word DOING, does your mind think "robić" or "robię"?',
+                options: ['YES', 'NO'],
+                weight: 25,
+                conditional: 'q4a'
+            },
+            {
+                area: 2,
+                id: 'q4a',
+                type: 'checkbox',
+                question: 'What does DOING mean?',
+                options: [
+                    'robienie i robić',
+                    'robię i robiący',
+                    'robiący/a, robiąc, robienie',
+                    'robienie i robię/robisz/robi/etc.',
+                    'I don\'t know'
+                ],
+                weight: 20,
+                showIf: {question: 'q4', answer: 'NO'}
+            },
+            {
+                area: 2,
+                id: 'q5',
+                type: 'checkbox',
+                question: 'Why is McDonald\'s slogan "I\'m loving it" and not "I love it"?',
+                options: [
+                    'It\'s a mistake but sounds catchy',
+                    'It means that you really love it now',
+                    'It shows you\'re actively experiencing enjoyment at McDonald\'s',
+                    'The grammar mistake attracts attention',
+                    'I don\'t know'
+                ],
+                weight: 20
+            },
+            {
+                area: 2,
+                id: 'q6',
+                type: 'radio',
+                question: 'Does past simple (I did, I went, I took) make you think of completed actions only (Zrobiłem, Poszedłem, Wziąłem)?',
+                options: ['YES', 'NO'],
+                weight: 25
+            },
+            {
+                area: 2,
+                id: 'q7',
+                type: 'checkbox',
+                question: 'What does "I\'m going to" ALWAYS mean?',
+                options: [
+                    'zamierzam',
+                    'future tense',
+                    'zmierzam',
+                    'mam taki plan',
+                    'I don\'t know'
+                ],
+                weight: 10
+            },
+            // AREA 3: Perfect Tenses
+            {
+                area: 3,
+                id: 'q8',
+                type: 'checkbox',
+                question: 'Which statement is true?',
+                options: [
+                    'We use Present Perfect when the time is not specified or not important',
+                    'Perfect tenses are the "behind equivalent" of their counterparts',
+                    'Perfect tenses show completed actions',
+                    'Future Perfect is an absurd tense',
+                    'I don\'t know'
+                ],
+                weight: 40
+            },
+            {
+                area: 3,
+                id: 'q9',
+                type: 'checkbox',
+                question: 'You should say "I will have paid you back by next Friday" because:',
+                options: [
+                    'You shouldn\'t - sounds like you\'re returning from the future',
+                    'It\'s good grammar - you used "by next Friday" time clause',
+                    'You want to emphasize that you will pay back for sure',
+                    'You\'re British',
+                    'I don\'t know'
+                ],
+                weight: 20
+            },
+            {
+                area: 3,
+                id: 'q10',
+                type: 'checkbox',
+                question: '"She is gone" best shows this situation in Polish:',
+                options: [
+                    'Ona wyszła',
+                    'Nie ma jej',
+                    'Ona poszła',
+                    'Właśnie wyszła'
+                ],
+                weight: 40
+            },
+            // AREA 4: Articles
+            {
+                area: 4,
+                id: 'q11',
+                type: 'checkbox',
+                question: 'Which statement is true:',
+                options: [
+                    'Articles have a lot of rules and exceptions',
+                    'Articles are pragmatic and solve a problem',
+                    'There are no articles in Polish',
+                    'Articles make English more efficient than Polish',
+                    'I don\'t know'
+                ],
+                weight: 25
+            },
+            {
+                area: 4,
+                id: 'q12',
+                type: 'text',
+                question: 'Complete: "I would like to have ___ car. ___ car that would be fast. ___ car that would be expensive."',
+                blanks: ['First blank', 'Second blank', 'Third blank'],
+                options: ['a', 'the', '(zero)'],
+                weight: 25
+            },
+            {
+                area: 4,
+                id: 'q13',
+                type: 'radio',
+                question: 'Using \'the\' in The United States, The United Kingdom and The Netherlands is an exception to the rule of no THE before country names.',
+                options: ['YES', 'NO'],
+                weight: 25
+            },
+            {
+                area: 4,
+                id: 'q14',
+                type: 'radio',
+                question: 'You use THE when there is only one of something like the sun or the president.',
+                options: ['YES', 'NO'],
+                weight: 25
+            },
+            // AREA 5: Verbs & Phrasals
+            {
+                area: 5,
+                id: 'q15',
+                type: 'checkbox',
+                question: 'Which statement is true:',
+                options: [
+                    'Phrasals are unique to English and there is nothing like it in Polish',
+                    'Phrasals are logical and show you the meaning',
+                    'You have to memorize all the different applications of a phrasal',
+                    'There is something quite similar in Polish',
+                    'I don\'t know'
+                ],
+                weight: 40
+            },
+            {
+                area: 5,
+                id: 'q16',
+                type: 'checkbox',
+                question: 'What can "break up" mean:',
+                options: [
+                    'End a relationship',
+                    'Get an allergic reaction',
+                    'Stop a fight',
+                    'Bad phone connection',
+                    'Go for lunch during work'
+                ],
+                weight: 20
+            },
+            {
+                area: 5,
+                id: 'q17',
+                type: 'checkbox',
+                question: 'These statements about the word UP are true:',
+                options: [
+                    'It has 1 meaning showing higher/more/stronger/👆/etc.',
+                    'It can mean anything depending on the context it is in',
+                    'It has about 8-10 meanings',
+                    'It is always opposite of down',
+                    'I don\'t know'
+                ],
+                weight: 40
+            }
+        ];
+        
+        const feedback = {
+            'q1': {
+                correct: 'One meaning',
+                explanation: 'Tests if you think ANY has two meanings. ANY always means "jakikolwiek" - Polish translation changes, English meaning doesn\'t.'
+            },
+            'q1a': {
+                correct: ['Do you have something for me?', 'Do you have nothing for me?', 'Do you have anything for me?', 'Don\'t you have nothing for me?'],
+                explanation: 'Tests if you\'re trapped by rules. ALL these options can be correct in English - if you only picked one, you\'re following fake rules about what\'s "allowed" in questions.'
+            },
+            'q2': {
+                correct: 'NO',
+                explanation: 'Polish brain alert! English can\'t skip words like Polish does. You need "explain IT to me" - no shortcuts allowed.'
+            },
+            'q4': {
+                correct: 'NO',
+                explanation: 'Tests if your brain processes -ing forms correctly. DOING shows ACTIVITY (robiący/a, robiąc, robienie) and is never a verb in English.'
+            },
+            'q4a': {
+                correct: ['robiący/a, robiąc, robienie'],
+                explanation: 'Tests if your brain processes -ing forms correctly. DOING shows ACTIVITY (robiący/a, robiąc, robienie) and is never a verb in English.'
+            },
+            'q5': {
+                correct: ['It shows you\'re actively experiencing enjoyment at McDonald\'s'],
+                explanation: 'Not a mistake, not "loving it now" - it shows actively enjoying the McDonald\'s experience. Continuous changes meaning, doesn\'t break rules.'
+            },
+            'q6': {
+                correct: 'NO',
+                explanation: 'Tests a dangerous myth. Past simple can mean "robiłem" OR "zrobiłem" - it shows facts or effects, not only completion.'
+            },
+            'q7': {
+                correct: ['zmierzam', 'future tense'],
+                explanation: 'It literally means "zmierzam do" (heading toward) AND it functions as future tense. Not just one or the other - both are ALWAYS true!'
+            },
+            'q8': {
+                correct: ['Perfect tenses are the "behind equivalent" of their counterparts'],
+                acceptable: ['Future Perfect is an absurd tense'],
+                explanation: 'Perfect = behind your reference point. Why it matters: One simple concept explains ALL perfect tenses instead of memorizing 50 rules.'
+            },
+            'q9': {
+                correct: ['You shouldn\'t - sounds like you\'re returning from the future'],
+                explanation: 'Sounds weird? That\'s because it IS weird - like you\'re reporting back from the future. Why it matters: Even natives avoid this "Nostradamus tense" - don\'t waste time learning grammar nobody uses.'
+            },
+            'q10': {
+                correct: ['Nie ma jej'],
+                explanation: '"She\'s gone" = "Nie ma jej": Here the verb is \'is\' which shows her state as gone. But we don\'t know if she went herself, got kidnapped, or teleported - all we know, she\'s gone, not here.'
+            },
+            'q11': {
+                correct: ['Articles are pragmatic and solve a problem', 'Articles make English more efficient than Polish'],
+                explanation: 'Articles truth: They\'re tools for clarity, not grammar torture. Why it matters: Unless you understand "what they do" not "where to put them," you\'ll always make mistakes while second guessing yourself.'
+            },
+            'q12': {
+                correct: ['a', 'a', 'a'],
+                explanation: 'It\'s ALL "a" because you would like ANY fast, expensive car from the many that exist. Why it matters: You\'re following the fake rule "second mention = THE" instead of understanding what you\'re really showing.'
+            },
+            'q13': {
+                correct: 'NO',
+                explanation: 'Not an exception - these aren\'t proper names like "Poland" or "France." They\'re descriptions (states that are united, kingdom that is united) so they need articles like any noun. Why it matters: You\'re memorizing fake exceptions when it\'s just basic grammar - descriptive names need articles, proper names don\'t'
+            },
+            'q14': {
+                correct: 'NO',
+                explanation: 'Wrong! THE = "you know which one of many" Why it matters: This myth makes you use THE incorrectly, sounding like a textbook instead of a human.'
+            },
+            'q15': {
+                correct: ['Phrasals are logical and show you the meaning', 'There is something quite similar in Polish'],
+                explanation: 'Plot twist - phrasals ARE logical (verb + particle meanings) and Polish has them too (wy-nosić, za-nosić, przy-nosić). Why it matters: You\'ve been torturing yourself memorizing "unique" English weirdness when you already understand the concept from Polish!'
+            },
+            'q16': {
+                correct: ['End a relationship', 'Stop a fight', 'Bad phone connection'],
+                explanation: '"Break up" always shows separation/fragmentation - relationships end, fighters separate, signals fragment. Why it matters: One concept (creating separation) explains all uses. Stop memorizing random meanings when logic gives you the answer!'
+            },
+            'q17': {
+                correct: ['It has about 8-10 meanings'],
+                explanation: 'UP has 8-10 specific meanings - not just "higher." Think: give up, wake up, show up, fed up. Why it matters: You can\'t decode phrasals thinking UP = ⬆️. Learn particles\' real meanings and phrasals become logical, not magical.'
+            }
+        };
+        
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            if (!question) {
+                calculateResults();
+                return;
+            }
+            
+            // Check if this question should be shown
+            if (question.showIf) {
+                const conditionAnswer = answers[question.showIf.question];
+                if (conditionAnswer !== question.showIf.answer) {
+                    currentQuestion++;
+                    showQuestion();
+                    return;
+                }
+            }
+            
+            // Hide attention notice after first question
+            if (currentQuestion > 0) {
+                document.getElementById('attentionNotice').style.display = 'none';
+            }
+            
+            let html = `<h3>Area ${question.area}: Question ${currentQuestion + 1} of ${questions.length}</h3>`;
+            html += `<div class="question">`;
+            html += `<h4>${question.question}</h4>`;
+            
+            if (question.type === 'text') {
+                html += '<div class="options">';
+                question.blanks.forEach((blank, i) => {
+                    html += `<p>${blank}:</p>`;
+                    question.options.forEach(opt => {
+                        html += `<label class="option">
+                            <input type="radio" name="${question.id}_${i}" value="${opt}">
+                            ${opt}
+                        </label>`;
+                    });
+                });
+                html += '</div>';
+            } else {
+                html += '<div class="options">';
+                question.options.forEach((opt, i) => {
+                    const inputType = question.type === 'checkbox' ? 'checkbox' : 'radio';
+                    html += `<label class="option">
+                        <input type="${inputType}" name="${question.id}" value="${opt}">
+                        ${opt}
+                    </label>`;
+                });
+                html += '</div>';
+            }
+            
+            html += '</div>';
+            
+            document.getElementById('testContent').innerHTML = html;
+            
+            // Add event listeners
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'INPUT') return;
+                    const input = this.querySelector('input');
+                    if (input.type === 'checkbox') {
+                        input.checked = !input.checked;
+                    } else {
+                        input.checked = true;
+                    }
+                    updateSelection();
+                });
+            });
+            
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', updateSelection);
+            });
+        }
+        
+        function updateSelection() {
+            document.querySelectorAll('.option').forEach(option => {
+                const input = option.querySelector('input');
+                if (input.checked) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+        
+        function nextQuestion() {
+            const question = questions[currentQuestion];
+            
+            if (question.type === 'text') {
+                const answer = [];
+                question.blanks.forEach((_, i) => {
+                    const selected = document.querySelector(`input[name="${question.id}_${i}"]:checked`);
+                    answer.push(selected ? selected.value : null);
+                });
+                answers[question.id] = answer;
+            } else if (question.type === 'checkbox') {
+                const checked = Array.from(document.querySelectorAll(`input[name="${question.id}"]:checked`))
+                    .map(input => input.value);
+                answers[question.id] = checked;
+            } else {
+                const selected = document.querySelector(`input[name="${question.id}"]:checked`);
+                answers[question.id] = selected ? selected.value : null;
+            }
+            
+            currentQuestion++;
+            updateProgress();
+            showQuestion();
+        }
+        
+        function updateProgress() {
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+        
+        function calculateResults() {
+            const scoring = {
+                // Area 1
+                'q1': (ans) => ans === 'One meaning' ? 35 : 0,
+                'q1a': (ans) => {
+                    const correct = ['Do you have something for me?', 'Do you have nothing for me?', 'Do you have anything for me?', 'Don\'t you have nothing for me?'];
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    let correctCount = 0;
+                    correct.forEach(c => {
+                        if (ans.includes(c)) correctCount++;
+                    });
+                    
+                    const baseScore = (correctCount / correct.length) * 35;
+                    const wrongCount = ans.length - correctCount;
+                    const deduction = wrongCount * 2;
+                    
+                    return Math.max(0, baseScore - deduction);
+                },
+                'q2': (ans) => ans === 'NO' ? 30 : 0,
+                // Area 2
+                'q4': (ans) => ans === 'NO' ? 25 : 0,
+                'q4a': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'robiący/a, robiąc, robienie';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 20;
+                        const wrongCount = ans.length - 1;
+                        score -= wrongCount * 5;
+                    } else if (ans.includes('I don\'t know')) {
+                        score = 0;
+                    }
+                    
+                    return Math.max(0, score);
+                },
+                'q5': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'It shows you\'re actively experiencing enjoyment at McDonald\'s';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 20;
+                        const wrongCount = ans.length - 1;
+                        score -= wrongCount * 5;
+                    } else if (ans.includes('I don\'t know')) {
+                        score = 0;
+                    }
+                    
+                    return Math.max(0, score);
+                },
+                'q6': (ans) => ans === 'NO' ? 25 : 0,
+                'q7': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = ['zmierzam', 'future tense'];
+                    let correctCount = 0;
+                    
+                    correct.forEach(c => {
+                        if (ans.includes(c)) correctCount++;
+                    });
+                    
+                    if (correctCount === 0) return 0;
+                    
+                    let score = correctCount === 2 ? 10 : 5;
+                    const wrongCount = ans.filter(a => !correct.includes(a) && a !== 'I don\'t know').length;
+                    score -= wrongCount * 2;
+                    
+                    return Math.max(0, score);
+                },
+                // Area 3
+                'q8': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'Perfect tenses are the "behind equivalent" of their counterparts';
+                    const acceptable = 'Future Perfect is an absurd tense';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 40;
+                        const wrongCount = ans.filter(a => a !== correct && a !== acceptable).length;
+                        score -= wrongCount * 10;
+                    } else if (ans.includes(acceptable)) {
+                        score = 20;
+                        const wrongCount = ans.filter(a => a !== acceptable).length;
+                        score -= wrongCount * 5;
+                    } else if (ans.includes('I don\'t know')) {
+                        score = 0;
+                    }
+                    
+                    return Math.max(0, score);
+                },
+                'q9': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'You shouldn\'t - sounds like you\'re returning from the future';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 20;
+                        const wrongCount = ans.length - 1;
+                        score -= wrongCount * 5;
+                    } else if (ans.includes('I don\'t know')) {
+                        score = 0;
+                    }
+                    
+                    return Math.max(0, score);
+                },
+                'q10': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'Nie ma jej';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 40;
+                        const wrongCount = ans.length - 1;
+                        score -= wrongCount * 10;
+                    }
+                    
+                    return Math.max(0, score);
+                },
+                // Area 4
+                'q11': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = ['Articles are pragmatic and solve a problem', 'Articles make English more efficient than Polish'];
+                    let correctCount = 0;
+                    
+                    correct.forEach(c => {
+                        if (ans.includes(c)) correctCount++;
+                    });
+                    
+                    if (correctCount === 0) return 0;
+                    
+                    let score = correctCount === 2 ? 25 : 12.5;
+                    const wrongCount = ans.filter(a => !correct.includes(a) && a !== 'I don\'t know').length;
+                    score -= wrongCount * 5;
+                    
+                    return Math.max(0, score);
+                },
+                'q12': (ans) => {
+                    if (!ans) return 0;
+                    let score = 0;
+                    if (ans[0] === 'a') score += 8.33;
+                    if (ans[1] === 'a') score += 8.33;
+                    if (ans[2] === 'a') score += 8.34;
+                    return score;
+                },
+                'q13': (ans) => ans === 'NO' ? 25 : 0,
+                'q14': (ans) => ans === 'NO' ? 25 : 0,
+                // Area 5
+                'q15': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = ['Phrasals are logical and show you the meaning', 'There is something quite similar in Polish'];
+                    let correctCount = 0;
+                    
+                    correct.forEach(c => {
+                        if (ans.includes(c)) correctCount++;
+                    });
+                    
+                    if (correctCount === 0) return 0;
+                    
+                    let score = correctCount === 2 ? 40 : 20;
+                    const wrongCount = ans.filter(a => !correct.includes(a) && a !== 'I don\'t know').length;
+                    score -= wrongCount * 8;
+                    
+                    return Math.max(0, score);
+                },
+                'q16': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = ['End a relationship', 'Stop a fight', 'Bad phone connection'];
+                    let correctCount = 0;
+                    
+                    correct.forEach(c => {
+                        if (ans.includes(c)) correctCount++;
+                    });
+                    
+                    if (correctCount === 0) return 0;
+                    
+                    const baseScore = (correctCount / correct.length) * 20;
+                    const wrongCount = ans.filter(a => !correct.includes(a)).length;
+                    const finalScore = baseScore - (wrongCount * 4);
+                    
+                    return Math.max(0, finalScore);
+                },
+                'q17': (ans) => {
+                    if (!ans || ans.length === 0) return 0;
+                    
+                    const correct = 'It has about 8-10 meanings';
+                    let score = 0;
+                    
+                    if (ans.includes(correct)) {
+                        score = 40;
+                        const wrongCount = ans.length - 1;
+                        score -= wrongCount * 10;
+                    } else if (ans.includes('I don\'t know')) {
+                        score = 0;
+                    }
+                    
+                    return Math.max(0, score);
+                }
+            };
+            
+            // Calculate area scores
+            const areaScores = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+            
+            Object.keys(answers).forEach(qId => {
+                if (scoring[qId]) {
+                    const score = scoring[qId](answers[qId]);
+                    const question = questions.find(q => q.id === qId);
+                    if (question) {
+                        areaScores[question.area] += score;
+                    }
+                }
+            });
+            
+            // Calculate overall score
+            const areaWeights = {
+                1: 0.15,
+                2: 0.25,
+                3: 0.20,
+                4: 0.25,
+                5: 0.15
+            };
+            
+            let overallScore = 0;
+            Object.keys(areaScores).forEach(area => {
+                overallScore += areaScores[area] * areaWeights[area];
+            });
+            
+            // Show results
+            showResults(overallScore, areaScores);
+            
+            // Store results globally for email
+            finalResults = {
+                overall: overallScore,
+                areas: areaScores
+            };
+        }
+        
+        function showResults(overall, areas) {
+            document.getElementById('testScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            // Animate overall score
+            const scoreCircle = document.querySelector('.score-circle');
+            const scoreDegrees = (overall / 100) * 360;
+            setTimeout(() => {
+                scoreCircle.style.setProperty('--score', `${scoreDegrees}deg`);
+                document.getElementById('finalScore').textContent = `${Math.round(overall)}%`;
+            }, 100);
+            
+            // Set message based on score
+            const distance = 100 - overall;
+            document.getElementById('scoreMessage').textContent = `You're ${Math.round(distance)}% away from native thinking`;
+            
+            // Animate area scores
+            setTimeout(() => {
+                Object.keys(areas).forEach(area => {
+                    const score = areas[area];
+                    document.getElementById(`area${area}Score`).style.width = `${score}%`;
+                    document.getElementById(`area${area}Percent`).textContent = `${Math.round(score)}%`;
+                });
+            }, 500);
+            
+            // Set custom message based on score range
+            let customMessage = '';
+            if (overall >= 90) {
+                customMessage = `
+                    <div style="padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <p style="font-size: 1.2em; line-height: 1.8;">
+                            <strong>The good news?</strong> Your English is exceptional.<br>
+                            <strong>The bad news?</strong> That invisible ${Math.round(distance)}% is why natives still know you're foreign.<br>
+                            <strong>The best news?</strong> We'll connect the dots already in your brain to eliminate those subtle tells forever.
+                        </p>
+                    </div>
+                `;
+            } else if (overall >= 70) {
+                customMessage = `
+                    <div style="padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <p style="font-size: 1.2em; line-height: 1.8;">
+                            <strong>The good news?</strong> Your English impresses people.<br>
+                            <strong>The bad news?</strong> Your brain still translates ${Math.round(distance)}% of the time, killing your natural flow.<br>
+                            <strong>The best news?</strong> Once you see English logic, those translation chains break themselves.
+                        </p>
+                    </div>
+                `;
+            } else if (overall >= 50) {
+                customMessage = `
+                    <div style="padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <p style="font-size: 1.2em; line-height: 1.8;">
+                            <strong>The good news?</strong> Your English gets the job done.<br>
+                            <strong>The bad news?</strong> Your Polish brain is working overtime, translating every thought.<br>
+                            <strong>The best news?</strong> We'll shut off that exhausting translation engine for good.
+                        </p>
+                    </div>
+                `;
+            } else if (overall >= 30) {
+                customMessage = `
+                    <div style="padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <p style="font-size: 1.2em; line-height: 1.8;">
+                            <strong>The good news?</strong> Your vocabulary is fine.<br>
+                            <strong>The bad news?</strong> You're drowning in fake rules that don't exist.<br>
+                            <strong>The best news?</strong> Real English is 10x simpler than the mess they taught you.
+                        </p>
+                    </div>
+                `;
+            } else {
+                customMessage = `
+                    <div style="padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <p style="font-size: 1.2em; line-height: 1.8;">
+                            <strong>The good news?</strong> You've studied English hard.<br>
+                            <strong>The bad news?</strong> Everything you learned is blocking real understanding.<br>
+                            <strong>The best news?</strong> When you finally see how English actually works, it's simpler than you ever imagined.
+                        </p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('customMessage').innerHTML = customMessage;
+        }
+        
+        function emailResults() {
+            const student = prompt("Please enter your name:");
+            if (!student) return;
+            
+            const areaNames = {
+                1: 'General Understanding',
+                2: 'Simple vs Continuous', 
+                3: 'Perfect Tenses',
+                4: 'Articles',
+                5: 'Verbs & Phrasals'
+            };
+            
+            let emailBody = `UnPolish Diagnostic Test Results%0D%0A`;
+            emailBody += `================================%0D%0A%0D%0A`;
+            emailBody += `Student: ${student}%0D%0A`;
+            emailBody += `Date: ${new Date().toLocaleDateString()}%0D%0A`;
+            emailBody += `Time: ${new Date().toLocaleTimeString()}%0D%0A%0D%0A`;
+            
+            emailBody += `OVERALL SCORE: ${Math.round(finalResults.overall)}%%0D%0A`;
+            emailBody += `Distance from Native Thinking: ${Math.round(100 - finalResults.overall)}%%0D%0A%0D%0A`;
+            
+            emailBody += `AREA SCORES:%0D%0A`;
+            Object.keys(finalResults.areas).forEach(area => {
+                emailBody += `${areaNames[area]}: ${Math.round(finalResults.areas[area])}%%0D%0A`;
+            });
+            
+            emailBody += `%0D%0ADETAILED ANSWERS:%0D%0A`;
+            questions.forEach(q => {
+                const answer = answers[q.id];
+                if (answer !== undefined && answer !== null) {
+                    emailBody += `%0D%0AQuestion: ${q.question}%0D%0A`;
+                    emailBody += `Answer: ${Array.isArray(answer) ? answer.join(', ') : answer}%0D%0A`;
+                }
+            });
+            
+            const subject = `UnPolish Test Results - ${student} - ${Math.round(100 - finalResults.overall)}% away from native`;
+            
+            window.location.href = `mailto:wokon@360yes.eu?subject=${subject}&body=${emailBody}`;
+        }
+        
+        function toggleDetailedResults() {
+            const detailedDiv = document.getElementById('detailedResults');
+            const button = event.target;
+            
+            if (detailedDiv.style.display === 'none') {
+                renderDetailedFeedback();
+                detailedDiv.style.display = 'block';
+                button.textContent = 'Hide Detailed Feedback';
+            } else {
+                detailedDiv.style.display = 'none';
+                button.textContent = 'Show My Detailed Feedback';
+            }
+        }
+        
+        function renderDetailedFeedback() {
+            let feedbackHtml = '<h3>Your Detailed Feedback:</h3>';
+            let hasAnswers = false;
+            
+            questions.forEach(q => {
+                const userAnswer = answers[q.id];
+                if (!userAnswer) return;
+                
+                hasAnswers = true;
+                const correctAnswer = feedback[q.id]?.correct;
+                const acceptableAnswer = feedback[q.id]?.acceptable;
+                
+                let isWrong = false;
+                let isIDontKnow = false;
+                
+                // Check if answer is "I don't know"
+                if (Array.isArray(userAnswer) && userAnswer.includes('I don\'t know')) {
+                    isIDontKnow = true;
+                } else if (userAnswer === 'I don\'t know') {
+                    isIDontKnow = true;
+                }
+                
+                // Check if answer is wrong
+                if (!isIDontKnow) {
+                    if (q.id === 'q12') {
+                        // Special handling for q12 (text blanks)
+                        isWrong = !(userAnswer[0] === 'a' && userAnswer[1] === 'a' && userAnswer[2] === 'a');
+                    } else if (Array.isArray(correctAnswer)) {
+                        if (!Array.isArray(userAnswer)) {
+                            isWrong = true;
+                        } else {
+                            // For checkbox questions, check if all correct answers are selected
+                            isWrong = !(correctAnswer.length === userAnswer.length && 
+                                       correctAnswer.every(item => userAnswer.includes(item)));
+                        }
+                    } else {
+                        isWrong = userAnswer !== correctAnswer;
+                        // Check acceptable answers
+                        if (isWrong && acceptableAnswer && Array.isArray(userAnswer) && 
+                            userAnswer.some(ans => acceptableAnswer.includes(ans))) {
+                            isWrong = false;
+                        }
+                    }
+                }
+                
+                if ((isWrong || isIDontKnow) && feedback[q.id]?.explanation) {
+                    feedbackHtml += `
+                        <div class="myth-item">
+                            <strong>Question: ${q.question}</strong><br>
+                            <span style="color: #ff3366;">Your answer: ${Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer || 'No answer'}</span><br>
+                            <span style="color: #4CAF50;">Correct answer: ${Array.isArray(correctAnswer) ? correctAnswer.join(', ') : correctAnswer}</span><br>
+                            <em style="color: #ccc; display: block; margin-top: 10px;">${feedback[q.id].explanation}</em>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (!hasAnswers) {
+                feedbackHtml = '<p>No feedback available.</p>';
+            }
+            
+            document.getElementById('detailedResults').innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>
