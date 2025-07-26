@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"A" VS. "THE": The Secret Grammar Books Never Tell You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .screen {
+            min-height: calc(100vh - 40px);
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .screen.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .highlight {
+            color: #ff3366;
+            font-weight: 600;
+        }
+        
+        .emphasis {
+            color: #ff6600;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        .visual-diagram {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .category {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .category-title {
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff6600;
+        }
+        
+        .category-icons {
+            font-size: 2em;
+            margin: 15px 0;
+            min-height: 40px;
+        }
+        
+        .category-examples {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .comparison {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .visual-example {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .myth-alert {
+            background: rgba(255, 51, 102, 0.15);
+            border: 2px solid #ff3366;
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin: 20px 0;
+        }
+        
+        .myth-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #ff3366;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .arrow {
+            font-size: 1em;
+            color: #ff6600;
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff3366, #ff6600);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+        }
+        
+        .btn:disabled {
+            background: #333;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .btn-back {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+        }
+        
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .nav-buttons .btn {
+            margin-top: 0;
+        }
+        
+        .nav-buttons .btn-back {
+            flex: 0 0 120px;
+        }
+        
+        .nav-buttons .btn-forward {
+            flex: 1;
+        }
+        
+        .bullet-list {
+            margin: 20px 0;
+        }
+        
+        .bullet-list li {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            position: relative;
+            font-size: 1em;
+        }
+        
+        .bullet-list li:before {
+            content: "•";
+            color: #ff3366;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .special-box {
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .expand-btn {
+            color: #00ff88;
+            cursor: pointer;
+            font-size: 1.4em;
+            margin-left: 5px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .expand-btn:hover {
+            color: #00ffaa;
+            transform: scale(1.1);
+        }
+        
+        .expandable {
+            display: none;
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        
+        .expandable.show {
+            display: block;
+        }
+        
+        .brain-test {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .brain-test:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .brain-response {
+            display: none;
+            color: #ff3366;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+        
+        .brain-test.revealed .brain-response {
+            display: block;
+        }
+        
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .quiz-option.selected {
+            border-color: #ff6600;
+            background: rgba(255, 102, 0, 0.1);
+        }
+        
+        .quiz-option.correct {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .quiz-option.incorrect {
+            border-color: #ff3366;
+            background: rgba(255, 51, 102, 0.1);
+        }
+        
+        .quiz-letter {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .quiz-text {
+            flex: 1;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .result-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .result-verdict {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .result-explanation {
+            font-size: 1em;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .progress-indicator {
+            text-align: center;
+            margin: 20px 0 10px;
+            opacity: 0.6;
+            font-size: 0.9em;
+        }
+        
+        .screen-number {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            opacity: 0.5;
+        }
+        
+        .test-question {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .test-question h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .feedback-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            display: none;
+            border-left: 4px solid #ff6600;
+        }
+        
+        .feedback-box.show {
+            display: block;
+        }
+        
+        .feedback-box.correct {
+            border-left-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .feedback-box.incorrect {
+            border-left-color: #ff3366;
+            background: rgba(255, 51, 102, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen 1: The Hook -->
+        <div class="screen active" id="screen1">
+            <div class="content">
+                <h1>"A" VS. "THE": The Secret Grammar Books Never Tell You</h1>
+                <p>What if articles aren't about grammar rules?</p>
+                <p>What if they're the most logical part of English?</p>
+                <p style="margin-top: 30px;">Native speakers feel it.</p>
+                <p>You're still playing Articles Russian Roulette.</p>
+                <p style="color: #ff6600; font-weight: 700; margin-top: 30px;">Plot twist: They're actually practical tools, not torture devices.</p>
+                <p style="font-size: 0.9em; opacity: 0.8;">(Grammar books just made them complicated)</p>
+            </div>
+            <button class="btn" onclick="navigateTo('screen2')">Let's Fix This →</button>
+            <p class="screen-number">1 / 15</p>
+        </div>
+        
+        <!-- Screen 2: The Polish Problem -->
+        <div class="screen" id="screen2">
+            <div class="content">
+                <h1>It's All About Precision</h1>
+                <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #ff6600;">English is efficient and precise.<br>Polish is... well, Polish.</p>
+                <div class="comparison">
+                    <p style="font-weight: 700; color: #ff6600;">Polish conversation:</p>
+                    <p style="font-size: 1.1em;">"Daj klucz"</p>
+                    <div style="font-size: 2em; margin: 15px 0;">🔑🗝️🔐🔑🗝️🔑</div>
+                    <p style="font-size: 1.1em; color: #ff6600;">"Który?" (Which one?) 🤷</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">confusion enters the chat<br>pointing intensifies<br>time wasted: 30 seconds</p>
+                </div>
+                <p style="margin-top: 30px;">English looked at this chaos and said: "We can do better."</p>
+                <p>So they created a system where <span class="emphasis">EVERY noun</span> tells you upfront which one we're talking about.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen1')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen3')">Show Me How →</button>
+            </div>
+            <p class="screen-number">2 / 15</p>
+        </div>
+        
+        <!-- Screen 3: The Three Articles -->
+        <div class="screen" id="screen3">
+            <div class="content">
+                <h1>Plot Twist: There Are THREE Articles</h1>
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 20px; color: #ff6600;">(and it's not about counting them!)</p>
+                <p style="font-size: 1.3em; text-align: center; margin-bottom: 25px;">Not two. THREE.<br><span style="font-size: 1.1em; color: #ff6600;">(A/AN, THE and ZERO)</span></p>
+                <p style="text-align: center; margin-bottom: 30px;">
+                    <span style="font-size: 1.1em; color: #ff6600; font-weight: 700;">3 situations, 3 articles, 1 goal:</span><br>
+                    <span style="font-size: 1.2em; font-weight: 600;">Make communication clear</span>
+                </p>
+                
+                <div class="visual-diagram">
+                    <div class="category">
+                        <div class="category-title">MANY <span class="expand-btn" onclick="toggleExpand('countable-note')">ⓘ</span></div>
+                        <div id="countable-note" class="expandable">
+                            Books call this COUNTABLE but we hate this term. It's not that you can count them that is the problem. It's is that there are MANY and since there are many, the problem is it may not be clear WHICH ONE!
+                        </div>
+                        <div style="font-size: 0.9em; color: #ff6600; margin-bottom: 10px;">(which one?)</div>
+                        <div class="category-icons">🔑🗝️🔐🔑🗝️🔑</div>
+                        <div class="category-examples">key, car, idea</div>
+                        <div style="margin-top: 15px;">
+                            <p style="color: #ff6600; font-weight: 700; font-size: 0.9em; margin-bottom: 10px;">NEED CLARIFICATION</p>
+                            <p style="font-size: 0.9em; margin-top: 5px;">A = any one<br>THE = that specific one</p>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="category-title">ONE OF A KIND <span class="expand-btn" onclick="toggleExpand('uncountable-note')">ⓘ</span></div>
+                        <div id="uncountable-note" class="expandable">
+                            Books call this UNCOUNTABLE which completely misses the point. The real point is these are unique, one-of-a-kind things (usually substances or concepts) and therefore THERE IS NOTHING TO CLARIFY! That's why we use NOTHING!
+                        </div>
+                        <div style="font-size: 0.9em; margin-bottom: 10px;">(no confusion)</div>
+                        <div class="category-icons">🌟</div>
+                        <div class="category-examples">air, happiness, time</div>
+                        <div style="margin-top: 15px;">
+                            <p style="color: #4CAF50; font-weight: 700; font-size: 0.9em; margin-bottom: 10px;">ALREADY CLEAR</p>
+                            <p style="font-size: 0.9em; margin-top: 8px; line-height: 1.4;">ZERO article<br>
+                            <span style="font-size: 0.8em; opacity: 0.8;">(No one asks "which air?")</span></p>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 20px; font-weight: 600;">Every noun must declare itself.<br>It's actually brilliant.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen2')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen4')">Show Me More →</button>
+            </div>
+            <p class="screen-number">3 / 15</p>
+        </div>
+        
+        <!-- Screen 4: The Big Myth -->
+        <div class="screen" id="screen4">
+            <div class="content">
+                <h1>🎯 Grammar Mythbusting</h1>
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px; color: #ff6600;">(When rules block understanding)</p>
+                
+                <div class="myth-alert">
+                    <p class="myth-header">What they told you:<br>"Use THE when there's only one"</p>
+                    
+                    <p style="color: #ff3366; font-size: 1.3em; font-weight: 700; margin: 15px 0;">Nope. That's backwards!</p>
+                    
+                    <p style="margin-bottom: 15px;"><strong>Think about it:</strong><br>
+                    If there's ONLY ONE of something,<br>what is there to distinguish?</p>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 5px;">
+                            <strong>"I need air"</strong> ✓
+                            <span class="expand-btn" onclick="toggleExpand('air1')">ⓘ</span>
+                        </p>
+                        <div id="air1" class="expandable">
+                            We all know which air - the stuff we breathe. No confusion possible.
+                        </div>
+                        <p>Not "THE air" - just air.<br>One of a kind = ZERO article.</p>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p style="margin-bottom: 5px;">
+                            <strong>But when someone want to stick a bike pump in your mouth, you go:</strong>
+                        </p>
+                        <p>
+                            "Not the air from the pump!" 
+                            <span class="expand-btn" onclick="toggleExpand('air2')">ⓘ</span>
+                        </p>
+                        <div id="air2" class="expandable">
+                            Now "air" has varieties - it moved from "one of a kind" to "which type?"
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; font-weight: 700; color: #4CAF50;">
+                    THE isn't about "only one exists"<br>
+                    It's about "you know which one out of many"
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen3')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen5')">Show Me Examples →</button>
+            </div>
+            <p class="screen-number">4 / 15</p>
+        </div>
+        
+        <!-- Screen 5: A vs THE Demo -->
+        <div class="screen" id="screen5">
+            <div class="content">
+                <h1>Again, From a Native Brain's Perspective</h1>
+                
+                <div class="visual-example">
+                    <p style="margin-bottom: 10px;"><strong>"Give me A key"</strong></p>
+                    <div style="font-size: 1.5em;">🔑🗝️🔑🔐🔑🗝️</div>
+                    <p style="font-style: italic; opacity: 0.8;">Native thinks: "Any key will do"<br>grabs nearest key</p>
+                </div>
+                
+                <div class="visual-example">
+                    <p style="margin-bottom: 10px;"><strong>"Give me THE key"</strong></p>
+                    <div style="font-size: 1.5em;">🔑🗝️🔑<span style="color: #ff3366;">🔐</span>🔑🗝️</div>
+                    <p style="font-style: italic; opacity: 0.8;">Native thinks: "Ah, that specific key"<br>knows exactly which one</p>
+                </div>
+                
+                <div class="visual-example">
+                    <p style="margin-bottom: 10px;"><strong>"Give me key"</strong></p>
+                    <p style="font-size: 2em; margin: 10px 0;">🤔</p>
+                    <p style="font-style: italic; opacity: 0.8;">Native brain twists into a pretzel: "Huh?! Keys are not one of a kind! You're Tarzan or Russian or you're having a stroke"</p>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; color: #ff6600; font-weight: 700;">Articles = Crystal Clear Communication</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen4')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen6')">But Wait... →</button>
+            </div>
+            <p class="screen-number">5 / 15</p>
+        </div>
+        
+        <!-- Screen 6: Conceptual Check -->
+        <div class="screen" id="screen6">
+            <div class="content">
+                <h1>Quick Check: Do You Get It?</h1>
+                
+                <div style="margin-bottom: 30px;">
+                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Question 1:</strong> When you say "Give me A key," what's really happening?</p>
+                    <div class="quiz-option" onclick="selectConceptAnswer1('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">It just means "Daj mi klucz"</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer1('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">It reveals the situation: "Daj mi jeden z wielu kluczy" (Give me one of many keys - which must have been there because "A" shows us that)</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer1('C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">Nothing. Articles are just decoration, like parsley</div>
+                    </div>
+                </div>
+                
+                <div id="question2" style="display: none; margin-bottom: 30px;">
+                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Question 2:</strong> Why does ZERO article exist?</p>
+                    <div class="quiz-option" onclick="selectConceptAnswer2('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">English ran out of articles</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer2('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">For things that are one-of-a-kind, there's nothing to clarify</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer2('C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">To give Polish speakers anxiety</div>
+                    </div>
+                </div>
+                
+                <div id="question3" style="display: none; margin-bottom: 30px;">
+                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Question 3:</strong> What happens when you put ZERO in front of a noun that belongs to the MANY category?</p>
+                    <div class="quiz-option" onclick="selectConceptAnswer3('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Native brain crashes: "Which one?! There are many!"</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer3('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">It sounds like broken English</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectConceptAnswer3('C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">You sound Russian (have you heard a Russian person use a/the?)</div>
+                    </div>
+                </div>
+                
+                <div id="conceptResult" style="display: none;">
+                    <div class="nav-buttons">
+                        <button class="btn btn-back" onclick="navigateTo('screen5')">← Back</button>
+                        <button class="btn btn-forward" onclick="navigateTo('screen7')">Continue →</button>
+                    </div>
+                </div>
+            </div>
+            <p class="screen-number">6 / 15</p>
+        </div>
+        
+        <!-- Screen 7: The Listener Focus -->
+        <div class="screen" id="screen7">
+            <div class="content">
+                <h1>Top Reason Learners Make Mistakes</h1>
+                <div class="myth-alert" style="margin-top: 30px;">
+                    <p class="myth-header">⚠️ Common Confusion Alert</p>
+                    <p style="text-align: center; margin-bottom: 15px;">"Use THE for specific things"</p>
+                    
+                    <p style="margin-bottom: 10px; color: #ff3366; font-weight: 700;">Here's what they didn't tell you:</p>
+                    
+                    <p style="margin-bottom: 10px;">It's not about what's specific in YOUR mind.</p>
+                    
+                    <p style="margin-bottom: 10px;"><strong>THE means:</strong><br>
+                    "The listener can identify which one"<br>(from context, prior knowledge, or because I'm pointing)</p>
+                    
+                    <p style="margin-top: 20px;">You might be thinking of a specific key.<br>But if the listener doesn't know which...<br><span style="color: #ff6600; font-weight: 700;">You still use A, not THE!</span></p>
+                    
+                    <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">Articles are about helping your listener,<br>not following rules.</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen6')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen8')">That Makes Sense! →</button>
+            </div>
+            <p class="screen-number">7 / 15</p>
+        </div>
+        
+        <!-- Screen 8: Category THE -->
+        <div class="screen" id="screen8">
+            <div class="content">
+                <h1>THE for Generalizing</h1>
+                
+                <div class="special-box">
+                    <p style="font-size: 1.2em; text-align: center; margin-bottom: 20px;">
+                    "I hate going to <span class="highlight">THE</span> doctor"<br>
+                    "I play <span class="highlight">THE</span> piano"<br>
+                    "I love <span class="highlight">THE</span> beach"
+                    </p>
+                    
+                    <p style="font-weight: 600; margin-bottom: 15px;">THE only time THE doesn't point to something specific is when it is used to generalize an entire category of "Many Nouns."</p>
+                    
+                    <p style="margin-bottom: 15px;">Not talking about one specific doctor.<br>I'm saying any and every doctor.</p>
+                    
+                    <p style="margin-top: 20px;">One example represents ALL.<br>THE generalizes the category.</p>
+                    
+                    <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">This is not an exception but the only option out of the 3 to generalize the MANY NOUNS category</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen7')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen9')">What About Plurals? →</button>
+            </div>
+            <p class="screen-number">8 / 15</p>
+        </div>
+        
+        <!-- Screen 9: Plural Nouns -->
+        <div class="screen" id="screen9">
+            <div class="content">
+                <h1>Plural Nouns: Even Simpler!</h1>
+                
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Can't use A/AN with plural<br>(A literally means ONE)</p>
+                
+                <p style="margin-bottom: 25px;">So your choices are:</p>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                    <p style="color: #ff6600; font-weight: 700; margin-bottom: 10px;">ZERO = General/All/Any</p>
+                    <p>"I love cats"<br><span style="font-size: 0.9em; opacity: 0.8;">(cats in general, all cats)</span></p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                    <p style="color: #ff6600; font-weight: 700; margin-bottom: 10px;">THE = Specific group</p>
+                    <p>"I love the cats next door"<br><span style="font-size: 0.9em; opacity: 0.8;">(those particular cats)</span></p>
+                </div>
+                
+                <p style="text-align: center; font-size: 1.1em; font-weight: 700; color: #4CAF50; margin: 30px 0;">Two options. Zero confusion.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen8')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen10')">Now I Get It! →</button>
+            </div>
+            <p class="screen-number">9 / 15</p>
+        </div>
+        
+        <!-- Screen 10: Cat Quiz -->
+        <div class="screen" id="screen10">
+            <div class="content">
+                <h1>Quick Reality Check #2</h1>
+                
+                <p style="font-size: 1.2em; margin-bottom: 30px; text-align: center;">When someone says "I'm going on vacation and I'm taking cats with me," what happens in a native brain?</p>
+                
+                <div id="catQuiz">
+                    <div class="quiz-option" onclick="selectCatAnswer('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Call the authorities and put up flyers in the neighborhood so people watch their cats - this guy seems weird</div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="selectCatAnswer('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">Nothing to see here, this guy is just taking his cats with him</div>
+                    </div>
+                </div>
+                
+                <div id="catQuizResult" style="display: none; margin-top: 30px;">
+                    <div class="result-box">
+                        <p class="result-verdict"></p>
+                        <p class="result-explanation"></p>
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="btn btn-back" onclick="navigateTo('screen9')">← Back</button>
+                        <button class="btn btn-forward" onclick="navigateTo('screen11')">Continue →</button>
+                    </div>
+                </div>
+            </div>
+            <p class="screen-number">10 / 15</p>
+        </div>
+        
+        <!-- Screen 11: The Simple System -->
+        <div class="screen" id="screen11">
+            <div class="content">
+                <h1>The Whole System in 30 Seconds</h1>
+                
+                <div class="bullet-list">
+                    <p style="color: #ff6600; margin-bottom: 15px;"><strong>For "many exist" nouns:</strong></p>
+                    <li><strong>A</strong> = any one (doesn't matter which)</li>
+                    <li><strong>THE</strong> = that one (you know which)</li>
+                    <li><strong>THE</strong> = the entire category (generalizing)</li>
+                </div>
+                
+                <div class="bullet-list">
+                    <p style="color: #ff6600; margin-bottom: 15px;"><strong>For "one of a kind" nouns:</strong></p>
+                    <li><strong>ZERO</strong> = no clarification needed</li>
+                </div>
+                
+                <div class="bullet-list">
+                    <p style="color: #ff6600; margin-bottom: 15px;"><strong>For plurals:</strong></p>
+                    <li><strong>ZERO</strong> = general/all</li>
+                    <li><strong>THE</strong> = specific group</li>
+                </div>
+                
+                <p style="text-align: center; margin-top: 40px; font-size: 1.3em; font-weight: 700; color: #4CAF50;">That's it.<br>That's the entire system.<br>Seriously.</p>
+                
+                <p style="text-align: center; margin-top: 20px; font-size: 0.9em; opacity: 0.8;">(Why did this take you 10 years to learn?)</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen10')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('screen12')">Test My Understanding →</button>
+            </div>
+            <p class="screen-number">11 / 15</p>
+        </div>
+        
+        <!-- Screen 12: Coffee Shop Quiz -->
+        <div class="screen" id="screen12">
+            <div class="content">
+                <h1>Quick Reality Check</h1>
+                <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px;">You walk into a coffee shop.<br>What do you say?</p>
+                
+                <div id="coffeeQuiz">
+                    <div class="quiz-option" onclick="selectAnswer('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">"I want coffee"</div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="selectAnswer('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"I want a coffee"</div>
+                    </div>
+                    
+                    <div class="quiz-option" onclick="selectAnswer('C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">"I want the coffee"</div>
+                    </div>
+                </div>
+                
+                <div id="quizResult" style="display: none; margin-top: 30px;">
+                    <div class="result-box">
+                        <p class="result-verdict"></p>
+                        <p class="result-explanation"></p>
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="btn btn-back" onclick="navigateTo('screen11')">← Back</button>
+                        <button class="btn btn-forward" onclick="navigateTo('screen13')">Continue →</button>
+                    </div>
+                </div>
+            </div>
+            <p class="screen-number">12 / 15</p>
+        </div>
+        
+        <!-- Screen 13: Common Polish Mistakes -->
+        <div class="screen" id="screen13">
+            <div class="content">
+                <h1>Which one's correct?</h1>
+                
+                <div id="mistake1" style="margin-bottom: 25px;">
+                    <p style="font-size: 1.1em; margin-bottom: 15px;"><strong>Sentence 1:</strong></p>
+                    <div class="quiz-option" onclick="selectMistake1('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">"Smartphone revolutionized the way we communicate"</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectMistake1('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"The smartphone revolutionized the way we communicate"</div>
+                    </div>
+                </div>
+                
+                <div id="mistake2" style="display: none; margin-bottom: 25px;">
+                    <p style="font-size: 1.1em; margin-bottom: 15px;"><strong>Sentence 2:</strong></p>
+                    <div class="quiz-option" onclick="selectMistake2('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">"Music helps me relax"</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectMistake2('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"The music helps me relax"</div>
+                    </div>
+                </div>
+                
+                <div id="mistake3" style="display: none; margin-bottom: 25px;">
+                    <p style="font-size: 1.1em; margin-bottom: 15px;"><strong>Sentence 3:</strong></p>
+                    <div class="quiz-option" onclick="selectMistake3('A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">"The life is beautiful"</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectMistake3('B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"Life is beautiful"</div>
+                    </div>
+                </div>
+                
+                <div id="mistakeResult" style="display: none;">
+                    <div class="nav-buttons">
+                        <button class="btn btn-back" onclick="navigateTo('screen12')">← Back</button>
+                        <button class="btn btn-forward" onclick="navigateTo('screen14')">Got It! →</button>
+                    </div>
+                </div>
+            </div>
+            <p class="screen-number">13 / 15</p>
+        </div>
+        
+        <!-- Screen 14: Pre-Test Setup -->
+        <div class="screen" id="screen14">
+            <div class="content">
+                <h1>You've Learned the Logic!</h1>
+                
+                <div style="margin: 30px 0;">
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">✓ Articles prevent confusion</p>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">✓ Three articles: A, THE, ZERO</p>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">✓ It's about the listener, not you</p>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">✓ The system never breaks</p>
+                </div>
+                
+                <p style="text-align: center; font-size: 1.3em; font-weight: 700; color: #ff6600; margin-top: 40px;">
+                    Now let's see if your brain has started to see what articles really do.
+                </p>
+                
+                <p style="text-align: center; margin-top: 30px; font-weight: 600;">
+                    Time to test your transformation:<br>
+                    Have you gotten closer to native like thinking now?
+                </p>
+                
+                <p style="text-align: center; margin-top: 20px; opacity: 0.8;">
+                    7 questions. No rules. Just understanding.
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen13')">← Back</button>
+                <button class="btn btn-forward" onclick="navigateTo('testIntro')">Test My Understanding →</button>
+            </div>
+            <p class="screen-number">14 / 15</p>
+        </div>
+        
+        <!-- Screen 15: What Next -->
+        <div class="screen" id="screen15">
+            <div class="content">
+                <h1>What Would You Like To Do?</h1>
+                
+                <div style="margin-top: 40px;">
+                    <div class="quiz-option" style="cursor: pointer;" onclick="alert('Taking you back to test results...')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📊</div>
+                        <div>
+                            <p style="font-weight: 700; margin-bottom: 5px;">BACK TO TEST RESULT</p>
+                            <p style="font-size: 0.9em; opacity: 0.8;">Review your assessment</p>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" style="cursor: pointer;" onclick="navigateTo('testIntro')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🎯</div>
+                        <div>
+                            <p style="font-weight: 700; margin-bottom: 5px;">TEST MY UNDERSTANDING</p>
+                            <p style="font-size: 0.9em; opacity: 0.8;">See how much your brain has changed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-option" style="cursor: pointer;" onclick="alert('Starting AI practice session...')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🤖</div>
+                        <div>
+                            <p style="font-weight: 700; margin-bottom: 5px;">PRACTICE ARTICLES WITH AI</p>
+                            <p style="font-size: 0.9em; opacity: 0.8;">Interactive exercises & feedback</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-back" onclick="navigateTo('screen14')" style="margin-top: 40px;">← Back</button>
+            <p class="screen-number">15 / 15</p>
+        </div>
+        
+        <!-- Test Introduction -->
+        <div class="screen" id="testIntro">
+            <div class="content">
+                <h1>Time to Test Your Transformation</h1>
+                <p style="font-size: 1.2em; margin-bottom: 30px;">You've seen the logic. Now let's see if your brain actually bought it or if it's still clinging to grammar rules like a security blanket.</p>
+                
+                <p style="margin-bottom: 20px;">Can you see articles as the logical system they really are? Or are you still playing Articles Roulette, crossing your fingers and hoping for the best?</p>
+                
+                <p style="font-size: 0.9em; opacity: 0.8;">7 questions. Real English. Pure understanding.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('screen14')">← Back</button>
+                <button class="btn btn-forward" onclick="startFinalTest()">Start Test →</button>
+            </div>
+            <p class="screen-number">Assessment Introduction</p>
+        </div>
+        
+        <!-- Test Questions -->
+        <div class="screen" id="test1">
+            <div class="content">
+                <h2>Question 1 of 7</h2>
+                <div class="test-question">
+                    <h4>In one sentence, what is the articles system really about?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(1, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Following grammar rules correctly</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(1, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">Making English sound more proper and formal</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(1, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">Preventing confusion by clarifying 'which one' before anyone has to ask</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(1, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">Following established grammar conventions</div>
+                    </div>
+                </div>
+                <div id="feedback1" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('testIntro')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn1" onclick="showNextQuestion(2)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 1 / 7</p>
+        </div>
+        
+        <div class="screen" id="test2">
+            <div class="content">
+                <h2>Question 2 of 7</h2>
+                <div class="test-question">
+                    <h4>What's the difference between these sentences:<br>'I love volleyball' and 'I love a volleyball'</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(2, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">No difference - both mean the same thing</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(2, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">First = the sport; Second = you're potentially in a committed relationship with some ball</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(2, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">First is informal; Second is more formal</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(2, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">You can only love people, not objects</div>
+                    </div>
+                </div>
+                <div id="feedback2" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test1')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn2" onclick="showNextQuestion(3)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 2 / 7</p>
+        </div>
+        
+        <div class="screen" id="test3">
+            <div class="content">
+                <h2>Question 3 of 7</h2>
+                <div class="test-question">
+                    <h4>Why do we say 'I am at home' but 'I am at THE house' or 'at MY house'?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(3, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Home is a special word that doesn't need articles</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(3, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"Home" = not a physical structure but a concept of where you belong (one-of-a-kind); "house" = physical building (one-of-many)</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(3, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">It's just an idiom you must memorize</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(3, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">Home and house mean the same thing (like "jail" and "prison")</div>
+                    </div>
+                </div>
+                <div id="feedback3" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test2')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn3" onclick="showNextQuestion(4)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 3 / 7</p>
+        </div>
+        
+        <div class="screen" id="test4">
+            <div class="content">
+                <h2>Question 4 of 7</h2>
+                <div class="test-question">
+                    <h4>Your friend says 'I have TV at home.' What does this mean to a native speaker?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(4, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">He has a television set at home (the big black rectangle)</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(4, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">He has television service/programming at home (Netflix and chill capability)</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(4, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">It's incorrect - should be 'a TV' or 'the TV'</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(4, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">Same as 'I have a TV at home' (potato, potahto)</div>
+                    </div>
+                </div>
+                <div id="feedback4" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test3')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn4" onclick="showNextQuestion(5)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 4 / 7</p>
+        </div>
+        
+        <div class="screen" id="test5">
+            <div class="content">
+                <h2>Question 5 of 7</h2>
+                <div class="test-question">
+                    <h4>Why do we say 'I go by car' and 'I go by bus' with no A or THE in front?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(5, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">It's the rule: Transportation words don't go with articles</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(5, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">It's an exception you must memorize</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(5, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">Car/bus here means method of transport (one-of-a-kind concept), not a physical vehicle</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(5, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">'By' is a special word that blocks articles from appearing</div>
+                    </div>
+                </div>
+                <div id="feedback5" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test4')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn5" onclick="showNextQuestion(6)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 5 / 7</p>
+        </div>
+        
+        <div class="screen" id="test6">
+            <div class="content">
+                <h2>Question 6 of 7</h2>
+                <div class="test-question">
+                    <h4>Why do we say 'President Obama' (no THE) but 'THE President of the United States'?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(6, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Obama is a proper name, so no article needed</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(6, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">"President Obama" = title (one-of-a-kind); "The President" = the person holding that position</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(6, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">One is formal, one is informal</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(6, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">Long titles always need THE (it's the law)</div>
+                    </div>
+                </div>
+                <div id="feedback6" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test5')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn6" onclick="showNextQuestion(7)" style="display: none;">Next Question →</button>
+            </div>
+            <p class="screen-number">Test: 6 / 7</p>
+        </div>
+        
+        <div class="screen" id="test7">
+            <div class="content">
+                <h2>Question 7 of 7</h2>
+                <div class="test-question">
+                    <h4>Why do we say 'in THE media' instead of 'in media'?</h4>
+                    <div class="quiz-option" onclick="selectTestAnswer(7, 'A')">
+                        <div class="quiz-letter">A</div>
+                        <div class="quiz-text">Media is always plural, so needs THE</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(7, 'B')">
+                        <div class="quiz-letter">B</div>
+                        <div class="quiz-text">Media is uncountable, so needs THE</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(7, 'C')">
+                        <div class="quiz-letter">C</div>
+                        <div class="quiz-text">"The media" = ALL news media outlets (not just your cousin's blog)</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectTestAnswer(7, 'D')">
+                        <div class="quiz-letter">D</div>
+                        <div class="quiz-text">It's just an exception to memorize (surprise!)</div>
+                    </div>
+                </div>
+                <div id="feedback7" class="feedback-box"></div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="navigateTo('test6')">← Back</button>
+                <button class="btn btn-forward" id="nextBtn7" onclick="showTestResults()" style="display: none;">See My Results →</button>
+            </div>
+            <p class="screen-number">Test: 7 / 7</p>
+        </div>
+        
+        <!-- Test Results -->
+        <div class="screen" id="testResults">
+            <div class="content">
+                <h1>Your Articles Transformation</h1>
+                <div class="result-box">
+                    <div class="result-verdict" id="testScore">Calculating...</div>
+                    <div class="result-explanation" id="testMessage"></div>
+                </div>
+                
+                <div id="transformationMessage" style="margin: 30px 0;"></div>
+            </div>
+            <button class="btn" onclick="navigateTo('feedbackScreen')">Continue →</button>
+            <p class="screen-number">Test Complete</p>
+        </div>
+        
+        <!-- Final Feedback Screen -->
+        <div class="screen" id="feedbackScreen">
+            <div class="content">
+                <h1>How was your experience?</h1>
+                <p style="font-size: 1.1em; margin-bottom: 30px;">Help us improve this module by sharing your thoughts</p>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 30px; margin: 30px 0;">
+                    <p style="font-size: 1.2em; font-weight: 600; color: #ff6600; margin-bottom: 20px;">What you just completed:</p>
+                    <p style="margin-bottom: 15px;">This module was designed to give you the <strong>conceptual foundations</strong> of how articles work in English - not through rules, but through logic and practical understanding.</p>
+                    
+                    <p style="margin-bottom: 15px;">For some of you, this overview will be enough to <span style="color: #4CAF50; font-weight: 600;">connect the dots</span> and start using articles more naturally.</p>
+                    
+                    <p>For others, we will offer additional:</p>
+                    <ul style="margin: 15px 0; list-style: none;">
+                        <li style="margin-bottom: 10px;">📚 <strong>Extended mini-lessons</strong> on specific article uses</li>
+                        <li style="margin-bottom: 10px;">✍️ <strong>Targeted practice exercises</strong> to reinforce the concepts</li>
+                        <li style="margin-bottom: 10px;">🤖 <strong>AI trainer sessions</strong> for personalized feedback</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px; font-size: 0.95em; opacity: 0.8;">Remember: This was just the beginning - the logical foundation. Real mastery comes from understanding these concepts and then applying them in practice.</p>
+                </div>
+                
+                <a href="https://forms.gle/X21yBLTnk36NCPqC9" target="_blank" class="btn" style="text-decoration: none;">
+                    Give Feedback →
+                </a>
+                
+                <p style="text-align: center; margin-top: 30px; font-size: 0.9em; opacity: 0.6;">
+                    Your feedback helps us create better learning experiences.<br>
+                    Thank you for taking the time to share your thoughts!
+                </p>
+            </div>
+            <button class="btn btn-back" onclick="navigateTo('testResults')">← Back to Results</button>
+            <p class="screen-number">Thank You</p>
+        </div>
+    </div>
+    
+    <script>
+        let currentScreen = 1;
+        let testAnswers = {};
+        let testScore = 0;
+        
+        function navigateTo(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Reset quiz states when navigating back
+            resetQuizIfNeeded(screenId);
+        }
+        
+        function resetQuizIfNeeded(screenId) {
+            // Reset coffee quiz on screen 12
+            if (screenId === 'screen12') {
+                resetCoffeeQuiz();
+            }
+            // Reset cat quiz on screen 10
+            else if (screenId === 'screen10') {
+                resetCatQuiz();
+            }
+            // Reset mistakes quiz on screen 13
+            else if (screenId === 'screen13') {
+                resetMistakesQuiz();
+            }
+            // Reset concept quiz on screen 6
+            else if (screenId === 'screen6') {
+                resetConceptQuiz();
+            }
+            // Reset test questions
+            else if (screenId.startsWith('test') && screenId !== 'testIntro' && screenId !== 'testResults') {
+                const questionNum = screenId.replace('test', '');
+                resetTestQuestion(questionNum);
+            }
+        }
+        
+        function resetCoffeeQuiz() {
+            const options = document.querySelectorAll('#coffeeQuiz .quiz-option');
+            options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index); // A, B, C
+                opt.onclick = function() { selectAnswer(letter); };
+            });
+            document.getElementById('quizResult').style.display = 'none';
+        }
+        
+        function resetCatQuiz() {
+            const options = document.querySelectorAll('#catQuiz .quiz-option');
+            options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index); // A, B
+                opt.onclick = function() { selectCatAnswer(letter); };
+            });
+            document.getElementById('catQuizResult').style.display = 'none';
+        }
+        
+        function resetMistakesQuiz() {
+            // Reset mistake 1
+            const mistake1Options = document.querySelectorAll('#mistake1 .quiz-option');
+            mistake1Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectMistake1(letter); };
+            });
+            // Remove any result divs
+            const mistake1Results = document.querySelector('#mistake1 + div');
+            if (mistake1Results && mistake1Results.style.cssText.includes('margin: 15px 0')) {
+                mistake1Results.remove();
+            }
+            
+            // Reset mistake 2
+            document.getElementById('mistake2').style.display = 'none';
+            const mistake2Options = document.querySelectorAll('#mistake2 .quiz-option');
+            mistake2Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectMistake2(letter); };
+            });
+            const mistake2Results = document.querySelector('#mistake2 + div');
+            if (mistake2Results && mistake2Results.style.cssText.includes('margin: 15px 0')) {
+                mistake2Results.remove();
+            }
+            
+            // Reset mistake 3
+            document.getElementById('mistake3').style.display = 'none';
+            const mistake3Options = document.querySelectorAll('#mistake3 .quiz-option');
+            mistake3Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectMistake3(letter); };
+            });
+            const mistake3Results = document.querySelector('#mistake3 + div');
+            if (mistake3Results && mistake3Results.style.cssText.includes('margin: 15px 0')) {
+                mistake3Results.remove();
+            }
+            
+            document.getElementById('mistakeResult').style.display = 'none';
+        }
+        
+        function resetConceptQuiz() {
+            // Reset question 1
+            const q1Options = document.querySelectorAll('#screen6 .quiz-option:not(#question2 .quiz-option):not(#question3 .quiz-option)');
+            q1Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectConceptAnswer1(letter); };
+            });
+            // Remove result div for question 1
+            const q1Result = Array.from(document.querySelector('#screen6 .content').children)
+                .find(el => el.style.cssText && el.style.cssText.includes('margin-top: 20px'));
+            if (q1Result) q1Result.remove();
+            
+            // Reset question 2
+            document.getElementById('question2').style.display = 'none';
+            const q2Options = document.querySelectorAll('#question2 .quiz-option');
+            q2Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectConceptAnswer2(letter); };
+            });
+            const q2Result = document.querySelector('#question2 > div:last-child');
+            if (q2Result && q2Result.style.cssText && q2Result.style.cssText.includes('margin-top: 20px')) {
+                q2Result.remove();
+            }
+            
+            // Reset question 3
+            document.getElementById('question3').style.display = 'none';
+            const q3Options = document.querySelectorAll('#question3 .quiz-option');
+            q3Options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index);
+                opt.onclick = function() { selectConceptAnswer3(letter); };
+            });
+            const q3Result = document.querySelector('#question3 > div:last-child');
+            if (q3Result && q3Result.style.cssText && q3Result.style.cssText.includes('margin-top: 20px')) {
+                q3Result.remove();
+            }
+            
+            document.getElementById('conceptResult').style.display = 'none';
+        }
+        
+        function resetTestQuestion(questionNum) {
+            const options = document.querySelectorAll(`#test${questionNum} .quiz-option`);
+            options.forEach((opt, index) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.style.cursor = 'pointer';
+                const letter = String.fromCharCode(65 + index); // A, B, C, D
+                opt.onclick = function() { selectTestAnswer(parseInt(questionNum), letter); };
+            });
+            
+            // Hide feedback and next button
+            const feedbackBox = document.getElementById(`feedback${questionNum}`);
+            if (feedbackBox) {
+                feedbackBox.classList.remove('show', 'correct', 'incorrect');
+                feedbackBox.innerHTML = '';
+            }
+            
+            const nextBtn = document.getElementById(`nextBtn${questionNum}`);
+            if (nextBtn) {
+                nextBtn.style.display = 'none';
+            }
+            
+            // Remove the answer from stored answers if going back
+            if (testAnswers[questionNum]) {
+                delete testAnswers[questionNum];
+                // Recalculate score
+                testScore = Object.keys(testAnswers).filter(q => {
+                    const correctAnswers = {1:'C', 2:'B', 3:'B', 4:'B', 5:'C', 6:'B', 7:'C'};
+                    return testAnswers[q] === correctAnswers[q];
+                }).length;
+            }
+        }
+        
+        function startFinalTest() {
+            navigateTo('test1');
+        }
+        
+        function selectTestAnswer(questionNum, answer) {
+            const options = document.querySelectorAll(`#test${questionNum} .quiz-option`);
+            
+            // Disable further clicks
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            // Mark selected
+            const selectedOption = Array.from(options).find(opt => 
+                opt.querySelector('.quiz-letter').textContent === answer
+            );
+            selectedOption.classList.add('selected');
+            
+            // Store answer
+            testAnswers[questionNum] = answer;
+            
+            // Show feedback after delay
+            setTimeout(() => {
+                showFeedback(questionNum, answer);
+            }, 500);
+        }
+        
+        function showFeedback(questionNum, answer) {
+            const feedbackBox = document.getElementById(`feedback${questionNum}`);
+            const nextBtn = document.getElementById(`nextBtn${questionNum}`);
+            const correctAnswers = {
+                1: 'C',
+                2: 'B', 
+                3: 'B',
+                4: 'B',
+                5: 'C',
+                6: 'B',
+                7: 'C'
+            };
+            
+            const feedbacks = {
+                1: {
+                    'C': {
+                        correct: true,
+                        text: "Perfect! English hates confusion like cats hate the vacuum cleaner. Articles force you to answer 'which one?' upfront - A = any one, THE = you know which, ZERO = no confusion possible. No guessing, no follow-up questions, just crystal clear communication. English speakers are basically control freaks who need to know EVERYTHING immediately."
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Forget grammar rules! Articles solve a communication problem. Polish allows 'Daj klucz' then asks 'który?' English says 'ABSOLUTELY NOT! Tell me which one RIGHT NOW: A key (any) or THE key (specific).' It's about clarity, not rules. English micromanages like that."
+                    },
+                    'B': {
+                        correct: false,
+                        text: "Formality is for wedding invitations, not communication! Articles aren't about sounding proper - they're precision tools. 'Give me key' = native brain crashes harder than Windows 95 ('Which one?! ERROR ERROR!'). Articles prevent that confusion by answering 'which one' before anyone's brain explodes."
+                    },
+                    'D': {
+                        correct: false,
+                        text: "Nothing conventional about it! Articles are pure efficiency. English speakers got tired of the Polish conversation: 'Daj mi klucz' → 'Który klucz?' → 'Ten klucz' → 'WHICH KLUCZ?!' So they built the answer into every noun. It's like GPS coordinates for words. Smart, not conventional."
+                    }
+                },
+                2: {
+                    'B': {
+                        correct: true,
+                        text: "Exactly! 'I love volleyball' = you enjoy hitting balls over nets with other humans (the sport, one-of-a-kind = ZERO). 'I love a volleyball' = it's an object (some ball out of many), you've named it, given it a personality, and probably talk to it (some ball out of many = needs 'a'). The sport is one-of-a-kind; the ball is some-ball-out-of-many. This exact grammar difference is part of the plot of an old Tom Hanks movie!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Oh honey, NO! These are completely different! 'I love volleyball' = the one-of-a-kind sport. 'I love a volleyball' = you've crossed into Tom Hanks and Wilson territory where you talk to objects. One-of-a-kind vs. some-ball-out-of-many = different articles! Your friends will stage VERY different interventions."
+                    },
+                    'C': {
+                        correct: false,
+                        text: "Articles aren't about formality - they're about meaning! 'I love volleyball' = the one-of-a-kind sport (ZERO article). 'I love a volleyball' = some ball out of many (A article). Different concepts need different articles! Fun fact: There's an Oscar-nominated movie about this particular situation!"
+                    },
+                    'D': {
+                        correct: false,
+                        text: "Actually, people love objects constantly - just watch someone drop their phone and witness true heartbreak! 'I love volleyball' = loving the sport (one of a kind, ZERO). 'I love a volleyball' = emotional bond with a spherical friend (some object out of many, needs 'a'). If loving volleyballs is wrong, Tom Hanks's character in Castaway doesn't want to be right! 🏐❤️"
+                    }
+                },
+                3: {
+                    'B': {
+                        correct: true,
+                        text: "Exactly! 'Home' = the concept of where you belong, your emotional GPS destination (one-of-a-kind concept, ZERO article). 'House' = a physical building made of bricks (one-of-many, needs A/THE). AntiMethod Insight: AT shows the exact location like a Google Maps pin. AT = positioned at a point, not inside or on top. Home is a concept you're located at, not a space you're inside!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Not a special exception! 'Home' = not a physical structure but a concept of belonging somewhere (one-of-a-kind). 'House' = physical building (one-of-many). AntiMethod Insight: AT works like a location pin - shows exactly where you are without suggesting you're inside or on top. AT home = located where the concept of home is at."
+                    },
+                    'C': {
+                        correct: false,
+                        text: "Pure logic, not memorization! 'Home' = not a physical structure but a concept (one-of-a-kind, ZERO). 'House' = a building (one-of-many, needs THE/A/MY). AntiMethod Insight: AT pinpoints your exact location without saying you're inside or on top of something. Here, it's like a GPS pin - you're positioned AT the place where your home is, because we don't know if your home has an inside to be in."
+                    },
+                    'D': {
+                        correct: false,
+                        text: "As different as 'happiness' and 'a happy meal'! 'Home' = concept, a place but not a structure that always has an inside (one-of-a-kind). 'House' = physical building (one-of-many). AntiMethod Insight: Notice 'AT home' - AT pinpoints your exact location without suggesting you are inside or on top of something. We don't know if your home has an inside to be in, that's why we say at home - at the place where your home is."
+                    }
+                },
+                4: {
+                    'B': {
+                        correct: true,
+                        text: "Perfect! 'I have TV at home' = he has television service/programming, the ability to watch shows (one-of-a-kind concept, ZERO article). Compare: 'I have A TV' = some television set that probably still has the energy guide sticker on it. 'I have THE TV' = that specific TV you both fought over in the divorce. TV-the-service vs TV-the-object = totally different meanings!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Nope! That would be 'I have A TV at home' (some television set out of many dusty electronics). 'I have TV' = television service, the blessing of 500 channels with nothing on (one-of-a-kind concept). Same word, different meaning: TV-the-service needs ZERO article, TV-the-object needs A or THE. One lets you watch shows, one collects dust!"
+                    },
+                    'C': {
+                        correct: false,
+                        text: "Actually, it's perfectly correct! Your English teacher missed this one! 'I have TV' = television service (one-of-a-kind, ZERO). 'I have A TV' = some physical television set (one-of-many). Both are perfect English - they just mean different things. Articles change meaning, not correctness!"
+                    },
+                    'D': {
+                        correct: false,
+                        text: "Not even close! 'I have TV' = the service that brings you shows (one-of-a-kind concept, ZERO). 'I have A TV' = some screen in your living room (some object out of many, needs A). Articles show the difference between having channels to watch vs having a device to dust! And what if you have TV but don't have a TV to watch TV on. See?"
+                    }
+                },
+                5: {
+                    'C': {
+                        correct: true,
+                        text: "Exactly! 'I go by car' = car as transportation method, not the metal can itself (one-of-a-kind concept, ZERO article). Compare: 'I was hit by A car' = some vehicle out of many tried to take you out. Same with art: 'drawing by pen' = pen as technique (fancy!), not 'by A pen' = using some specific Bic that you stole from the bank. Method vs object = different meanings!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Not a rule! Transportation words love articles when they're objects: 'I saw A bus' (it was yellow), 'THE car is broken' (shocking!). It's about meaning: 'by car' = transportation method (one-of-a-kind), 'by A car' = next to some specific vehicle. Transportation METHOD vs transportation OBJECT = different things!"
+                    },
+                    'B': {
+                        correct: false,
+                        text: "More like Logic Example #1! 'By car' = car as method of transport (one-of-a-kind concept). Like 'death by chocolate' = chocolate as substance and cause, not 'death by A chocolate' = murdered by some specific Snickers. The SAME WORD can be method (ZERO) or object (A/THE). Logic, not exceptions!"
+                    },
+                    'D': {
+                        correct: false,
+                        text: "'By' isn't special! It's more like a category selector. 'I go by A car' is grammatically possible but means you travel alongside some specific vehicle (weird flex, but OK). 'By car' = by using this mode transportation. 'By A car' = next to some particular car. Articles change meaning, and 'by' adapts to what makes sense in each case!"
+                    }
+                },
+                6: {
+                    'B': {
+                        correct: true,
+                        text: "Perfect! 'President Obama' = using president as his name tag at the world's most important party (one-of-a-kind title, ZERO article, capitalized like it matters). 'THE President of the United States' = pointing to some person currently sitting in that wild job (some person out of many people who wish they weren't). Title vs person = different things!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "It's not just about proper names! It's about HOW you're using 'president.' As a title: 'President Obama' (ZERO article, like 'Doctor Smith' or 'Captain Crunch'). As a description of the person: 'THE President' (pointing to whoever's currently aging rapidly in that job). Title vs the person in the role = different meanings!"
+                    },
+                    'C': {
+                        correct: false,
+                        text: "Not about formality! 'President Obama' = President as his title (one-of-a-kind concept, like 'Emperor' or 'Your Majesty'). 'THE President of the United States' = some person holding that position (currently stress-eating McDonald's in the Oval Office). Same word, different function: title vs description!"
+                    },
+                    'D': {
+                        correct: false,
+                        text: "Sure and when the moon is in retrograde say it twice… Cmon now! ! 'President Obama' = title (ZERO article). 'THE President' = some person in that role. You could say 'THE President Obama' if you mean 'that specific Obama guy from all the Obamas,' but 'President Obama' uses president as his title, like a name upgrade!"
+                    }
+                },
+                7: {
+                    'C': {
+                        correct: true,
+                        text: "Perfect! 'THE media' means ALL news media outlets - every newspaper, TV station, radio show, and that guy yelling news on the corner. Without THE, 'media' could mean any 'mediums' (psychic mediums predicting your love life, art mediums like macaroni, storage mediums like CDs). THE tells listeners you mean the complete category of organizations that somehow know what Lady Gaga had for breakfast!"
+                    },
+                    'A': {
+                        correct: false,
+                        text: "Not about plural! THE clarifies which type of media. 'Media' alone is dangerously vague - could include psychic mediums ('I see dead people'), art mediums ('Is mayonnaise a medium?'), or storage mediums (RIP floppy disks). 'THE media' = ALL news outlets. THE defines the category of professional gossipers!"
+                    },
+                    'B': {
+                        correct: false,
+                        text: "THE defines the category! 'Media' could mean fortune tellers, paint types, or those things you put data on. 'THE media' means ALL news media outlets - that complete category of people who somehow make 'Local Man Eats Giant Sandwich' into breaking news. THE prevents confusion about which type of media you mean!"
+                    },
+                    'D': {
+                        correct: false,
+                        text: "Pure logic strikes again! THE defines which category of 'mediums.' 'Media' is too broad - psychic mediums ('Your aura is beige'), art mediums ('I work in cheese'), communication mediums ('Smoke signals, anyone?'). 'THE media' = ALL news outlets. THE clarifies you mean professional news people, not crystal ball enthusiasts!"
+                    }
+                }
+            };
+            
+            const feedback = feedbacks[questionNum][answer];
+            const isCorrect = correctAnswers[questionNum] === answer;
+            const selectedOption = document.querySelector(`#test${questionNum} .quiz-option.selected`);
+            
+            if (isCorrect) {
+                testScore++;
+                feedbackBox.classList.add('correct');
+                selectedOption.classList.add('correct');
+            } else {
+                feedbackBox.classList.add('incorrect');
+                selectedOption.classList.add('incorrect');
+                // Also highlight correct answer
+                const correctOption = Array.from(document.querySelectorAll(`#test${questionNum} .quiz-option`))
+                    .find(opt => opt.querySelector('.quiz-letter').textContent === correctAnswers[questionNum]);
+                if (correctOption) {
+                    correctOption.classList.add('correct');
+                }
+            }
+            
+            feedbackBox.innerHTML = feedback.text;
+            feedbackBox.classList.add('show');
+            nextBtn.style.display = 'block';
+        }
+        
+        function showNextQuestion(nextNum) {
+            navigateTo(`test${nextNum}`);
+        }
+        
+        function showTestResults() {
+            const scorePercent = Math.round((testScore / 7) * 100);
+            const scoreDisplay = document.getElementById('testScore');
+            const messageDisplay = document.getElementById('testMessage');
+            const transformationDisplay = document.getElementById('transformationMessage');
+            
+            let title = '';
+            let message = '';
+            let transformation = '';
+            
+            if (scorePercent >= 85) {
+                title = "🎉 Brain Surgery Successful!";
+                message = "Holy moly! When it comes to articles, you're beginning to think like a native speaker. Your textbook-damaged brain has made a full recovery!";
+                transformation = "Congratulations! Your brain has officially divorced grammar rules and is now in a committed relationship with logical thinking. You see articles as the precision communication tools they really are. You've closed the gap between you and native speakers when it comes to Articles. Are the other areas of English as clear as this?";
+            } else if (scorePercent >= 70) {
+                title = "🧠 Major Brain Rewiring Detected!";
+                message = "Impressive! You're definitely beginning to understand the system, but a few textbook ghosts are still haunting your brain.";
+                transformation = "You're well on your way to native-level thinking! Most of those pesky grammar rules have been successfully deleted from your brain's hard drive. However, a few stubborn rule-based thoughts are still trying to crash your logical thinking party. Try the AI Articles Trainer to lock in this understanding and eliminate those last few rule-based blocks!";
+            } else if (scorePercent >= 50) {
+                title = "🔧 Brain Under Construction";
+                message = "Good foundation! You're getting there, but your brain is still having an identity crisis between rules and logic.";
+                transformation = "Your brain is currently in renovation mode - half logical understanding, half grammar rule chaos. The good news? You understand some core concepts! The challenge? You're still mixing textbook nonsense with actual understanding. Check out our expanded Articles modules to solidify these concepts, then practice with the AI Trainer to evict those remaining grammar trolls!";
+            } else {
+                title = "🏥 Intensive Grammar Recovery Needed";
+                message = "Don't panic! Your brain is still heavily infected with textbook rules, but recovery is totally possible.";
+                transformation = "Your brain is basically a grammar rule refugee camp right now - crowded, confused, and not very functional. But hey, admitting you have a problem is the first step! The good news? Textbook damage is reversible. Start with our expanded Articles modules to rebuild your foundation properly, then get all those 'rules' out of your system with focused practice.";
+            }
+            
+            scoreDisplay.innerHTML = `${scorePercent}% - ${title}`;
+            messageDisplay.textContent = message;
+            transformationDisplay.innerHTML = `<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">${transformation}</div>`;
+            
+            navigateTo('testResults');
+        }
+        
+        function continueToNextModule() {
+            alert('Next module: Simple vs Continuous - Coming soon!');
+        }
+        
+        function toggleExpand(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('show')) {
+                element.classList.remove('show');
+            } else {
+                element.classList.add('show');
+            }
+        }
+        
+        function selectConceptAnswer1(answer) {
+            const options = document.querySelectorAll('#screen6 .quiz-option:not(#question2 .quiz-option):not(#question3 .quiz-option)');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin-top: 20px; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'B') {
+                options[1].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Exactly!</strong> Articles don\'t just translate words - they reveal the whole communication situation. "A" tells everyone there are multiple keys here!';
+            } else if (answer === 'A') {
+                options[0].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">Not quite!</strong> It\'s not just a translation. "A" reveals there are many keys and you want any one of them.';
+            } else {
+                options[2].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">Ha! Nice try!</strong> Articles aren\'t decoration - they\'re essential information that prevents confusion.';
+            }
+            
+            options[options.length - 1].parentElement.appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('question2').style.display = 'block';
+            }, 2000);
+        }
+        
+        function selectConceptAnswer2(answer) {
+            const options = document.querySelectorAll('#question2 .quiz-option');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin-top: 20px; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'B') {
+                options[1].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Perfect!</strong> When something is one-of-a-kind (like air, water, happiness), there\'s nothing to clarify, so we use nothing!';
+            } else if (answer === 'A') {
+                options[0].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">Nice try!</strong> But English didn\'t "run out" - it has exactly as many as it needs. ZERO exists because one-of-a-kind things need ZERO clarification!';
+            } else {
+                options[2].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">We know it feels that way!</strong> But ZERO actually makes perfect sense - it shows something that is one of a kind so nothing to clarify = no article needed.';
+            }
+            
+            document.getElementById('question2').appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('question3').style.display = 'block';
+            }, 2000);
+        }
+        
+        function selectConceptAnswer3(answer) {
+            const options = document.querySelectorAll('#question3 .quiz-option');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin-top: 20px; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'A' || answer === 'B') {
+                options[answer === 'A' ? 0 : 1].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Yes!</strong> Without an article, "many" nouns break native brains. "Give me key" = ERROR ERROR ERROR!';
+            } else {
+                options[2].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">Well...</strong> You\'ve gone full Ivan Drago: "I defeat all man. Soon I defeat real champion." (not "THE real champion"). But the real issue isn\'t sounding Russian - it\'s that native brains literally can\'t process MANY nouns without A or THE!';
+            }
+            
+            document.getElementById('question3').appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('conceptResult').style.display = 'block';
+            }, 2000);
+        }
+        
+        function selectAnswer(answer) {
+            const options = document.querySelectorAll('#coffeeQuiz .quiz-option');
+            const resultDiv = document.getElementById('quizResult');
+            const verdict = document.querySelector('#quizResult .result-verdict');
+            const explanation = document.querySelector('#quizResult .result-explanation');
+            
+            // Disable further clicks
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            // Mark selected
+            options[answer.charCodeAt(0) - 65].classList.add('selected');
+            
+            // Show results
+            setTimeout(() => {
+                if (answer === 'C') {
+                    options[2].classList.add('incorrect');
+                    verdict.innerHTML = '<span style="color: #ff3366;">Not quite!</span>';
+                    explanation.innerHTML = '"THE coffee" only works if the barista already knows which coffee you mean when you point to it with THE.<br><br>Both A and B work perfectly:<br>• "I want coffee" = the substance<br>• "I want a coffee" = one serving';
+                } else {
+                    options[answer === 'A' ? 0 : 1].classList.add('correct');
+                    verdict.innerHTML = '<span style="color: #4CAF50;">Perfect!</span>';
+                    explanation.innerHTML = answer === 'A' 
+                        ? '"I want coffee" ✓ You want the substance itself. Clear and natural!'
+                        : '"I want a coffee" ✓ You want one serving. Crystal clear!';
+                }
+                resultDiv.style.display = 'block';
+            }, 500);
+        }
+        
+        function selectCatAnswer(answer) {
+            const options = document.querySelectorAll('#catQuiz .quiz-option');
+            const resultDiv = document.getElementById('catQuizResult');
+            const verdict = resultDiv.querySelector('.result-verdict');
+            const explanation = resultDiv.querySelector('.result-explanation');
+            
+            // Disable further clicks
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            // Mark selected
+            options[answer === 'A' ? 0 : 1].classList.add('selected');
+            
+            // Show results
+            setTimeout(() => {
+                if (answer === 'A') {
+                    options[0].classList.add('correct');
+                    verdict.innerHTML = '<span style="color: #4CAF50;">Correct!</span>';
+                    explanation.innerHTML = 'Without THE, it sounds like you\'re taking cats in general - any cats you can find! Native brain immediately thinks: "This weirdo is going around collecting random cats! Alert the neighborhood!" You meant "taking THE cats" but accidentally announced a cat-napping spree.';
+                } else {
+                    options[1].classList.add('incorrect');
+                    verdict.innerHTML = '<span style="color: #ff3366;">Nope!</span>';
+                    explanation.innerHTML = '"Taking cats" (without THE) doesn\'t mean "taking MY cats" - it means taking cats in general, like you\'re on some weird cat-collecting mission. Native speakers hear this and panic about their own cats\' safety!';
+                }
+                resultDiv.style.display = 'block';
+            }, 500);
+        }
+        
+        function selectMistake1(answer) {
+            const options = document.querySelectorAll('#mistake1 .quiz-option');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin: 15px 0; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'A') {
+                options[0].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">This one\'s wrong!</strong> Missing THE before smartphone. When generalizing about a "many" noun category, you need THE!';
+            } else {
+                options[1].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Correct!</strong> THE smartphone = generalizing about all smartphones as a category.';
+            }
+            
+            document.getElementById('mistake1').appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('mistake2').style.display = 'block';
+            }, 1500);
+        }
+        
+        function selectMistake2(answer) {
+            const options = document.querySelectorAll('#mistake2 .quiz-option');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin: 15px 0; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'B') {
+                options[1].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">This one\'s wrong!</strong> Music is "one of a kind" as a concept. Unless you\'re referring to some specific type of music (the music of Nas), use ZERO!';
+            } else {
+                options[0].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Correct!</strong> Music (in general) needs no article - it\'s already clear.';
+            }
+            
+            document.getElementById('mistake2').appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('mistake3').style.display = 'block';
+            }, 1500);
+        }
+        
+        function selectMistake3(answer) {
+            const options = document.querySelectorAll('#mistake3 .quiz-option');
+            const resultDiv = document.createElement('div');
+            resultDiv.style.cssText = 'margin: 15px 0; padding: 15px; border-radius: 10px; font-size: 0.95em;';
+            
+            options.forEach(opt => {
+                opt.onclick = null;
+                opt.style.cursor = 'default';
+            });
+            
+            if (answer === 'A') {
+                options[0].classList.add('incorrect');
+                resultDiv.style.background = 'rgba(255, 51, 102, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #ff3366;">This one\'s wrong!</strong> Life is an abstract "one of a kind" concept. No THE needed!';
+            } else {
+                options[1].classList.add('correct');
+                resultDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                resultDiv.innerHTML = '<strong style="color: #4CAF50;">Correct!</strong> Life (abstract concept) uses ZERO article.';
+            }
+            
+            document.getElementById('mistake3').appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.getElementById('mistakeResult').style.display = 'block';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
